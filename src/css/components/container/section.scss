@@ -1,0 +1,10 @@
+.section {
+  &--profile {
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+    padding-bottom: 1.7rem;
+    position: relative;
+    z-index: 1;
+  }
+}

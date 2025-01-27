@@ -1,0 +1,160 @@
+html:has(.header__menu-toggle:checked) {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.header {
+  margin: 1.6rem 2.4rem 0 1.7rem;
+  background: transparent;
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    height: 2.4rem;
+    display: flex;
+    gap: $spacing-xxs;
+
+    &-back {
+      display: flex;
+      width: 3rem;
+      padding-top: 0.3rem;
+      align-items: center;
+      gap: $spacing-xxs;
+
+      &-wrapper {
+        display: flex;
+        height: 3rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.3rem;
+        flex: 1 0 0;
+      }
+
+      &-icon {
+        display: flex;
+        width: 3rem;
+        height: 3rem;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100%;
+        background: $color-pink;
+      }
+    }
+
+    &-image {
+      height: 100%;
+    }
+  }
+
+  &__menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+
+    &-toggle {
+      display: none;
+
+      &:checked ~ .header__menu-dropdown {
+        display: block;
+      }
+
+      &:checked ~ .header__menu-btn {
+
+      }
+    }
+
+    &-dropdown {
+      display: none;
+      position: fixed;
+      right: 0;
+      top: 0;
+      background: #fff;
+      padding: 1rem;
+      background: rgba(0, 81, 173, 0.97);
+      box-shadow: -3px -7px 37.9px 72px rgba(0, 0, 0, 0.45);
+      min-width: 78%;
+      z-index: 9999;
+      height: 100vh;
+
+      &::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 9999;
+      }
+
+      .header__menu-close {
+        background: url("/gfx/icons/close.svg") no-repeat top center / contain;
+        width: 2rem;
+        height: 2rem;
+        position: absolute;
+        top: 2.46rem;
+        right: 2.46rem;
+        cursor: pointer;
+        z-index: 10001;
+      }
+    }
+
+    &-item {
+      padding: 0.5rem 0;
+    }
+
+    &-wrapper {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: inline-flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      top: 20%;
+      left: 10%;
+      align-items: flex-start;
+      gap: 1.7rem;
+      position: relative;
+      z-index: 10000;
+
+    }
+
+    &-link {
+      color: #FB0;
+      font-size: $font-size-md;
+      font-style: normal;
+      font-weight: $font-weight-light;
+      line-height: normal;
+      text-decoration: none;
+      display: block;
+      font-family: $font-main;
+    }
+
+    &-btn {
+      width: 2.2921rem;
+      height: 1.2972rem;
+      padding: 0;
+      border: 0;
+      background: none;
+      cursor: pointer;
+      background: url("/gfx/icons/hamburger.svg") no-repeat top center / contain;
+    }
+
+    &-icon {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__greeting {
+    color: $color-light;
+    font-family: $font-main;
+    font-size: $font-size-small;
+    font-weight: $font-weight-normal;
+  }
+}

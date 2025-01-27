@@ -1,0 +1,37 @@
+#!/bin/sh
+mode=${1%/}
+
+RED='\033[1;31m'
+GREEN='\033[1;32m'
+NC='\033[0m' # No Color
+
+if [ "$(whoami)" != "root" ]; then
+	printf "${RED}RUN: Musić mieć uprawnienia administratora!\n"
+	printf "${NC}Uruchom skrypt przy pomocy: sudo ./run $mode\n"
+	exit 1
+fi
+
+if [ "$mode" != "dev" ] && [ "$mode" != "build" ] && [ "$mode" != "watch" ]; then
+	printf "${RED}RUN: Brak zdefiniowanego trybu do uruchomienia!\n"
+	printf "${NC}Możliwe tryby to:\n"
+	printf " * dev   - jednorazowo uruchamia proces budowania do katalogu /dev/ (cms)\n"
+	printf " * build - jednorazowo uruchamia proces budowania do katalogu /build/ (produkcja). Ten tryb dodatkowo odpala joba do kopiowania zbudowanych templates\n"
+	printf " * watch - uruchamia tryb dev w trybie obserwowania zmian\n"
+	exit 1
+fi
+
+npm run $mode && (
+	[ $mode = "build" ] && (
+		timestamp=`date +%s`
+		buildpath=".builds/$timestamp"
+		mv .builds/build/ $buildpath
+		ln -sfn $buildpath build
+
+		# usuwa katalogi starsze niż 10 dni i o numerze porzadkowym > 10
+		find .builds/* -maxdepth 0 -type d -ctime +10 | sort -r | tail -n +11 | xargs rm -rf
+	) && (
+		(
+			./run_rsh_templates_job && printf "${GREEN}RUN: Zadanie $mode zostało zakończone ze statusem: OK\n${NC}"
+		) || printf "${RED}RUN: Zadanie $mode zostało zakończone pomyślnie, ale wystąpiły błędy z kopiowaniem templates.\n${NC}"
+	) || printf "${GREEN}RUN: Zadanie $mode zostało zakończone ze statusem: OK\n${NC}"
+) || printf "${RED}RUN: Zadanie $mode zostało zakończone ze statusem: ERROR\n${NC}"

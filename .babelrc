@@ -1,0 +1,26 @@
+{
+  "presets": [
+    ["env", {
+      "useBuiltIns": "usage",
+      "modules": false
+    }],
+    "stage-0",
+  ],
+  "plugins": ["transform-class-properties"],
+  "compact": true,
+  "comments": true,
+  "env": {
+    "test": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "node": "current"
+            }
+          }
+        ]
+      ]
+    }
+  }
+}

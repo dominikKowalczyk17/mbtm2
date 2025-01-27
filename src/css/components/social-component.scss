@@ -1,0 +1,147 @@
+.social {
+  $root: &;
+  width: 100%;
+  background: $color-light;
+  border-top: 1px solid #dbdbdb;
+  border-bottom: 1px solid #dbdbdb;
+  font-family: $font-main;
+  margin-top: 3rem;
+  border-radius: 1.1rem;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 1.2rem;
+    border-bottom: 1px solid #dbdbdb;
+  }
+
+  &__profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__avatar {
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 50%;
+    overflow: hidden;
+    background: $color-light;
+
+    @include object-fit(cover);
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+  }
+
+  &__username {
+    font-weight: 600;
+    font-size: $font-size-xs;
+    color: $color-dark;
+  }
+
+  &__meta {
+    font-size: $font-size-xxxs;
+    color: $color-dark-gray;
+  }
+
+  &__follow-btn {
+    background: $color-light-blue;
+    color: $color-light;
+    border: 0;
+    border-radius: .4rem;
+    padding: .6rem;
+    font-weight: 600;
+    font-size: $font-size-small;
+    min-width: 8rem;
+    transition: background .2s $easing-in;
+
+    &:active {
+      background: darken($color-light-blue, 10%);
+    }
+  }
+
+  &__content {
+    width: 100%;
+    position: relative;
+
+    &:before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
+  }
+
+  &__image {
+    @include fill;
+    @include object-fit(cover);
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    padding: .8rem 1.2rem;
+
+    &-primary {
+      display: flex;
+      gap: 1.6rem;
+    }
+  }
+
+  &__action-btn {
+    background: none;
+    border: 0;
+    padding: .8rem;
+    color: $color-dark;
+
+    min-width: 4.4rem;
+    min-height: 4.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 2.4rem;
+      height: 2.4rem;
+    }
+
+    &:active {
+      color: $color-dark-gray;
+    }
+  }
+
+  &__engagement {
+    padding: 0 1.6rem 1.6rem;
+  }
+
+  &__likes {
+    font-weight: 600;
+    font-size: $font-size-small;
+    margin-bottom: .6rem;
+    color: $color-dark-gray;
+  }
+
+  &__caption {
+    font-size: $font-size-small;
+    line-height: 1.4;
+    margin-bottom: .4rem;
+    word-wrap: break-word;
+    color: $color-dark-gray;
+
+    #{$root}__username {
+      margin-right: .4rem;
+    }
+  }
+
+  &__timestamp {
+    font-size: $font-size-xxs;
+    color: $color-dark-gray;
+    text-transform: uppercase;
+    letter-spacing: .02rem;
+    margin-top: .8rem;
+  }
+}

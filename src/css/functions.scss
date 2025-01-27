@@ -1,0 +1,270 @@
+// Functions
+
+@function get-perc($in, $out: $page-width - ($page-padding * 2)) {
+  @return $in / $out * 100%;
+}
+
+@function get-aspect($w, $h) {
+  @return $h / $w * 100%;
+}
+
+// https://gist.github.com/jlong/f06f5843104ee10006fe
+$red-magic-number: 241;
+$green-magic-number: 691;
+$blue-magic-number: 68;
+$brightness-divisor: $red-magic-number + $green-magic-number +
+  $blue-magic-number;
+
+@function sqrt($r) {
+  $x0: 1;
+  $x1: $x0;
+
+  @for $i from 1 through 10 {
+    $x1: $x0 - ($x0 * $x0 - abs($r)) / (2 * $x0);
+    $x0: $x1;
+  }
+
+  @return $x1;
+}
+
+@function get-brightness($color) {
+  // Extract color components
+  $red-component: red($color);
+  $green-component: green($color);
+  $blue-component: blue($color);
+
+  // Calculate a brightness value in 3d color space between 0 and 255
+  $number: sqrt(
+    (
+      ($red-component * $red-component * $red-magic-number) +
+      ($green-component * $green-component * $green-magic-number) +
+      ($blue-component * $blue-component * $blue-magic-number)
+    ) / $brightness-divisor
+  );
+
+  // Convert to percentage and return
+  @return 100% * $number / 255;
+}
+
+@function get-contrast-color($bg) {
+  @if get-brightness($bg) < 65% {
+    @return #fff;
+  }
+
+  @else {
+    @return #000;
+  }
+}
+
+///////////////////////////////////////////////////////////
+// Plain SASS Trigonometry Algorithm in Taylor Expansion //
+//                                                       //
+// Based on                                              //
+//      http://japborst.net/posts/sass-sines-and-cosines //
+///////////////////////////////////////////////////////////
+
+$pi: 3.14159265359;
+$_precision: 10;
+
+@function pow($base, $exp) {
+  $value: $base;
+  @if $exp > 1 {
+    @for $i from 2 through $exp {
+      $value: $value * $base;
+    }
+  }
+  @if $exp < 1{
+    @for $i from 0 through -$exp {
+      $value: $value / $base;
+    }
+  }
+  @return $value;
+}
+
+@function fact($num) {
+  $fact: 1;
+  @if $num > 0{
+    @for $i from 1 through $num {
+      $fact: $fact * $i;
+    }
+  }
+  @return $fact;
+}
+
+@function _to_unitless_rad($angle) {
+  @if unit($angle) == "deg" {
+    $angle: $angle / 180deg * $pi;
+  }
+  @if unit($angle) == "rad" {
+    $angle: $angle / 1rad;
+  }
+  @return $angle;
+}
+
+@function sin($angle){
+  $a: _to_unitless_rad($angle);
+  $sin: $a;
+  @for $n from 1 through $_precision {
+    $sin: $sin + (pow(-1, $n) / fact(2 * $n + 1) ) * pow($a, (2 * $n + 1));
+  }
+  @return $sin;
+}
+
+@function cos($angle){
+  $a: _to_unitless_rad($angle);
+  $cos: 1;
+  @for $n from 1 through $_precision {
+    $cos: $cos + ( pow(-1,$n) / fact(2*$n) ) * pow($a,2*$n);
+  }
+  @return $cos;
+}
+
+@function tan($angle){
+  @return sin($angle) / cos($angle);
+}
+
+
+// Mixins
+
+@mixin clearfix($el: 'after') {
+  &:#{$el} {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin vmiddle {
+  &:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+  }
+}
+
+@mixin aspect($w, $h) {
+  &:before {
+    content: '';
+    float: left;
+    width: 1px;
+    height: 0;
+    margin-left: -1px;
+    padding-top: get-aspect($w, $h);
+  }
+
+  @include clearfix;
+}
+
+@mixin fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@mixin figcaption {
+  position: absolute;
+  bottom: 0; right: 0;
+  padding: 2px 4px 4px;
+  font-size: 1rem;
+  line-height: 1;
+  color: #fff;
+  background: rgba(0, 0, 0, .5);
+}
+
+@mixin loader {
+  content: '';
+  width: 30px; height: 30px;
+  border: 4px solid transparent;
+  border-top: 4px solid $color-light-blue;
+  border-radius: 30px;
+  position: absolute;
+  top: 50%; left: 50%;
+  margin: -15px;
+  animation: rotate .5s infinite linear;
+}
+
+@function alpha-attribute($color, $background: white) {
+  $percent: alpha($color) * 100%;
+  $opaque: opacify($color, 1);
+  $solid-color: mix($opaque, $background, $percent);
+
+  @return $solid-color;
+}
+
+@mixin one-of-n-siblings($args...) {
+  $selector-list: '';
+
+  @each $value in $args {
+    $selector-list: $selector-list + unquote(':nth-last-child(#{$value})');
+  }
+
+  &#{$selector-list}:first-child,
+  &#{$selector-list}:first-child ~ & {
+    @content;
+  }
+}
+
+@mixin mq($breakpoint...) {
+  @media #{$breakpoint} {
+    @content;
+  }
+}
+
+@mixin text-crop($font-family: 'sans-serif', $line-height: 1.3, $top-adjustment: '0px', $bottom-adjustment: '0px') {
+
+  // Configured in Step 1
+  $top-crop: 7;
+  $bottom-crop: 7;
+  $crop-font-size: 51;
+  $crop-line-height: 1;
+
+  @if ($font-family == $font-main) {
+    $top-crop: 10;
+    $bottom-crop: 5;
+    $crop-font-size: 51;
+    $crop-line-height: 1;
+  }
+
+  @if ($font-family == $font-sub) {
+    $top-crop: 7;
+    $bottom-crop: 6;
+    $crop-font-size: 51;
+    $crop-line-height: 1;
+  }
+
+  // Apply values to calculate em-based margins that work with any font size
+  $dynamic-top-crop: max(($top-crop + ($line-height - $crop-line-height) * ($crop-font-size / 2)), 0) / $crop-font-size;
+  $dynamic-bottom-crop: max(($bottom-crop + ($line-height - $crop-line-height) * ($crop-font-size / 2)), 0) / $crop-font-size;
+
+  // Mixin output
+  line-height: $line-height;
+
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    width: 0; height: 0;
+  }
+
+  &:before {
+    margin-bottom: calc(-#{$dynamic-top-crop}em + #{$top-adjustment});
+  }
+
+  &:after {
+    margin-top: calc(-#{$dynamic-bottom-crop}em + #{$bottom-adjustment});
+  }
+}
+
+@mixin object-fit($fit: 'fill', $position: false) {
+  @if ($position) {
+    object-fit: $fit;
+    object-position: $position;
+    font-family: 'object-fit: #{$fit}; object-position: #{$position};', sans-serif;
+  } @else {
+    object-fit: $fit;
+    font-family: 'object-fit: #{$fit};', sans-serif;
+  }
+}

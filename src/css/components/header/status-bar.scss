@@ -1,0 +1,16 @@
+.status {
+  height: 3.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__time {
+    margin-left: 1.74rem;
+    margin-top: 0.992rem;
+  }
+
+  &__icons {
+    margin-right: 1.16rem;
+    margin-top: 1.32rem;
+  }
+}

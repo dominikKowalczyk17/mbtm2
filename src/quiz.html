@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Lato:300,300i,400,400i,700,700i&amp;subset=latin-ext&amp;display=fallback"
+          rel="stylesheet">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Quiz - LoveIsland</title>
+    <script>document.documentElement.classList.remove('no-js');</script>
+</head>
+<body>
+
+<div class="container container--target" id="container">
+
+    <article class="feed feed--quiz feed--target">
+        <figure class="feed__figure">
+            <img alt="" class="feed__img lazy-load" data-src="gfx/img1.jpg">
+        </figure>
+
+        <div class="quiz" data-id="quiz-id" data-update="quiz-update">
+            <input autocomplete="off" checked class="quiz__state" id="quiz-step-1" name="quiz123step" type="radio"
+                   value="1">
+            <input autocomplete="off" class="quiz__state" id="quiz-step-2" name="quiz123step" type="radio" value="2">
+            <input autocomplete="off" class="quiz__state" id="quiz-step-3" name="quiz123step" type="radio" value="3">
+            <input autocomplete="off" class="quiz__state" id="quiz-step-4" name="quiz123step" type="radio" value="4">
+            <input autocomplete="off" class="quiz__state quiz__state--end" id="quiz-step-5" name="quiz123step"
+                   type="radio"
+                   value="5">
+
+            <fieldset class="quiz__step">
+                <div class="feed__header-wrap">
+                    <header class="feed__header">
+                        <h2 class="feed__title">Odpowiedz <br>na pytania</h2>
+                        <div class="feed__view-count">3 pytania</div>
+                    </header>
+                </div>
+
+                <div class="feed__content">
+                    <button class="button button--quiz quiz__start" disabled>Rozpocznij Quiz</button>
+                </div>
+            </fieldset>
+
+            <fieldset class="quiz__step">
+                <div class="feed__header-wrap">
+                    <header class="feed__header feed__header--counter" data-counter="1/3">
+                        <h2 class="feed__title">Pytanie <br>2 linijki</h2>
+                        <div class="feed__view-count">Wybierz 1 odpowiedź</div>
+                    </header>
+                </div>
+
+                <div class="feed__content">
+                    <ul class="quiz__answers" data-id="1">
+                        <li class="quiz__answer">
+                            <button class="button button--quiz-answer quiz__button" data-valid="0">Odpowiedź 1</button>
+                        </li>
+                        <li class="quiz__answer">
+                            <button class="button button--quiz-answer quiz__button" data-valid="0">Odpowiedź 2</button>
+                        </li>
+                        <li class="quiz__answer">
+                            <button class="button button--quiz-answer quiz__button" data-valid="1">Odpowiedź 3</button>
+                        </li>
+                        <li class="quiz__answer">
+                            <button class="button button--quiz-answer quiz__button" data-valid="0">Odpowiedź 4</button>
+                        </li>
+                    </ul>
+                </div>
+            </fieldset>
+
+            <fieldset class="quiz__step">
+                <div class="feed__header-wrap">
+                    <header class="feed__header feed__header--counter" data-counter="2/3">
+                        <h2 class="feed__title">Pytanie 2</h2>
+                        <div class="feed__view-count">Wybierz 1 odpowiedź</div>
+                    </header>
+                </div>
+
+                <div class="feed__content">
+                    <ul class="quiz__answers" data-id="2">
+                        <li class="quiz__answer">
+                            <button class="button button--quiz-answer quiz__button" data-valid="0">Odpowiedź 1</button>
+                        </li>
+                        <li class="quiz__answer">
+                            <button class="button button--quiz-answer quiz__button" data-valid="1">Odpowiedź 2</button>
+                        </li>
+                        <li class="quiz__answer">
+                            <button class="button button--quiz-answer quiz__button" data-valid="0">Odpowiedź 3</button>
+                        </li>
+                        <li class="quiz__answer">
+                            <button class="button button--quiz-answer quiz__button" data-valid="0">Odpowiedź 4</button>
+                        </li>
+                    </ul>
+                </div>
+            </fieldset>
+
+            <fieldset class="quiz__step">
+                <div class="feed__header-wrap">
+                    <header class="feed__header feed__header--counter" data-counter="3/3">
+                        <h2 class="feed__title">Pytanie 3</h2>
+                        <div class="feed__view-count">Wybierz 1 odpowiedź</div>
+                    </header>
+                </div>
+
+                <div class="feed__content">
+                    <ul class="quiz__answers" data-id="3">
+                        <li class="quiz__answer">
+                            <button class="button button--quiz-answer quiz__button" data-valid="0">Odpowiedź 1</button>
+                        </li>
+                        <li class="quiz__answer">
+                            <button class="button button--quiz-answer quiz__button" data-valid="0">Odpowiedź 2</button>
+                        </li>
+                        <li class="quiz__answer">
+                            <button class="button button--quiz-answer quiz__button" data-valid="0">Odpowiedź 3</button>
+                        </li>
+                        <li class="quiz__answer">
+                            <button class="button button--quiz-answer quiz__button" data-valid="1">Odpowiedź 4</button>
+                        </li>
+                    </ul>
+                </div>
+            </fieldset>
+
+            <fieldset class="quiz__step quiz__step--end">
+                <div class="feed__header-wrap">
+                    <header class="feed__header">
+                        <h2 class="feed__title">Podsumowanie wyników głosowania</h2>
+                    </header>
+                </div>
+                <div class="feed__content">
+                    <div class="quiz__result">
+                        Twój wynik
+                        <button class="quiz__share feed__share">Udostępnij</button>
+                        <div class="quiz__result-digit">
+                            <span class="quiz__result-valid"></span><small class="quiz__result-all">/3</small>
+                        </div>
+                    </div>
+                    <div class="quiz__result-text"></div>
+                    <div class="feed__text feed__text--1">Zobacz nasz najnowszy artykuł:<a class="feed__quiz-link"
+                                                                                           href="news.html">Najprzystojniejszy
+                        Islander na Wyspie Miłości</a></div>
+                    <div class="feed__text feed__text--2">Zobacz nasz najnowszy artykuł:<a class="feed__quiz-link"
+                                                                                           href="news.html">Najprzystojniejszy
+                        Islander na Wyspie Miłości</a></div>
+                </div>
+            </fieldset>
+
+        </div>
+    </article>
+
+    <script class="viewCountData" type="application/json">
+        {
+            "action": "/icm/",
+            "module_id": "MzI5Mg==",
+            "ELEMENT_ID": 12345,
+            "FK_ELEMENT_TYPES_ID": 3
+        }
+    </script>
+
+</div>
+
+</body>
+</html>

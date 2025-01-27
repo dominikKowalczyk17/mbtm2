@@ -1,0 +1,127 @@
+// Dimensions
+
+$page-width: 1300px;
+$page-padding: 30px;
+
+$header-main-height: 85px;
+$header-sub-height: 45px;
+$header-main-sticky-height: 60px;
+$header-main-mobile-wide-height: 68px;
+
+$aside-width: 360px;
+
+$news-gap: 20px;
+
+// Fonts
+
+$font-main: "Helvetica Neue LT Com", sans-serif;
+$font-sub: 'Josefin Sans', sans-serif;
+
+$font-weight-think: 100;
+$font-weight-extraLight: 200;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semiBold: 600;
+$font-weight-bold: 700;
+$font-weight-extraBold: 800;
+
+$font-size-xxxs: .9rem;
+$font-size-xxs: 1.1rem;
+$font-size-xs: 1.2rem;
+$font-size-txt: 1.3rem;
+$font-size-small: 1.4rem;
+$font-size-normal: 1.6rem;
+$font-size-md: 2.3rem;
+$font-size-lg: 2.7rem;
+
+$font-line-height-small: 1.6rem;
+$font-line-height-normal: 2rem;
+
+
+// Colors
+
+$color-alert: #de2622;
+$color-yellow: #f7d000;
+$color-light-blue: #00a0f5;
+$color-gray-blue: #367fbf;
+$color-dark-blue: #10357a;
+$color-light: #FFFFFF;
+$color-light-gray: #ccc;
+$color-dark-gray: #666;
+$color-dark: #000;
+$color-bg: #eaeaea;
+$color-border: #e5e5e5;
+
+
+$color-pink: #B2096F;
+$color-purple: #450A2B;
+$color-error: #ff1b1c;
+$color-pink-dark: #e72376;
+
+
+// Spacings
+
+$spacing-xxxxxs: .5rem;
+$spacing-xxxxs: .7rem;
+$spacing-xxs: 1rem;
+$spacing-xs: 1.3rem;
+$spacing-normal: 1.7rem;
+$spacing-medium: 3rem;
+$spacing-large: 3rem;
+$spacing-big: 6.6rem;
+
+
+$section-spacing-xsmall: 2rem;
+$section-spacing-small: 2.8rem;
+$section-spacing-normal: 3.7rem;
+
+$main_padding: 1.7rem;
+$padding_large: 2.4rem;
+
+// Border
+
+$border-radius: 1.1rem;
+
+// Shadows
+
+$shadow-header: 0 0 15px rgba(0, 0, 0, .25);
+$shadow-search-form: 0 0 15px rgba(0, 0, 0, .15);
+
+// Easings
+
+$easing-in: cubic-bezier(.4, 0, .2, 1);
+$easing-out: cubic-bezier(.4, 0, .6, 1);
+
+// Transitions
+
+$transition-in: transform .15s $easing-in;
+$transition-out: transform .2s $easing-out;
+
+// Socials
+
+$socials: 'facebook' #3a579a,
+'twitter' #47c7fa,
+'youtube' #f00,
+'instagram' #b335a4,
+'googleplus' #df4a32,
+'rss' #f8991d;
+
+$shares: 'facebook',
+'twitter',
+'wykop',
+'googleplus',
+'share',
+'more',
+'comments';
+
+// Breakpoints
+
+$min-tablet: '(min-width: 640px)';
+$min-mobile: 'all';
+
+$max-tablet: 'all';
+$max-mobile: '(max-width: 639px)';
+
+$tablet: '(min-width: 640px)';
+$mobile: '(max-width: 639px)';

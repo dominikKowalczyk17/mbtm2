@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Must Be The Music - Dawid Kwiatkowski</title>
+</head>
+<body>
+<section class="section--profile">
+    <div class="container">
+        <%= require('html-loader!./status-bar.html') %>
+        <%= require('html-loader!./header.html') %>
+    </div>
+
+    <main class="main">
+        <article class="profile">
+            <header class="profile__header">
+                <div class="profile__name">
+                    <p>
+                        Dawid Kwiatkowski
+                    </p>
+                </div>
+                <img alt="Dawid Kwiatkowski" class="profile__image" src="./gfx/dawid-kwiatkowski.jpg">
+            </header>
+
+            <section class="profile__bio">
+                <div class="profile__text">
+                    Polski piosenkarz, autor tekstów i kompozytor. Karierę muzyczną zaczynał w zespole Two of Us. Solową
+                    działalność rozpoczął albumem „9893". Do czasu startu programu miał ich na swoim koncie osiem. Do
+                    jego
+                    największych przebojów można zaliczyć takie utwory jak „Jesteś", „Bez Ciebie", „Proste" czy „Idziesz
+                    ze
+                    mną".<br>Wiele z jego singli pokryło się złotą lub platynową płytą. Uczestniczył w programie
+                    „Dancing
+                    with
+                    the Stars. Taniec z Gwiazdami", gdzie tańczył z Janją Lesar. Odpadł w odcinku półfinałowym. Użyczał
+                    głosu w filmach i bajkach. Laureat takich nagród jak Nickelodeon Kids' Choice Awards, MTV Europe
+                    Music
+                    Awards i Telekamery.
+                </div>
+                <section class="profile__video">
+                    <figure class="video">
+                        <button aria-label="Odtwórz wideo" class="video__play-btn" type="button">
+                            <img alt="" class="video__thumbnail" height="193" src="./gfx/video-thumbnail.jpg">
+                            <time class="video__duration" datetime="PT4M24S">04:24</time>
+                        </button>
+                    </figure>
+                </section>
+            </section>
+        </article>
+    </main>
+</section>
+</body>
+</html>

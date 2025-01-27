@@ -1,0 +1,11 @@
+.picture {
+  position: relative;
+  border-radius: $border-radius;
+  overflow: hidden;
+  aspect-ratio: 16/9;
+
+  &__thumbnail {
+    width: 100%;
+    height: auto;
+  }
+}

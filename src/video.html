@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pl" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Lato:300,300i,400,400i,700,700i&amp;subset=latin-ext&amp;display=fallback" rel="stylesheet">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Video - LoveIsland</title>
+  <script>document.documentElement.classList.remove('no-js')</script>
+</head>
+<body>
+
+  <div class="container container--target" id="container">
+
+    <article class="feed feed--video feed--target">
+      <figure class="feed__video-wrap feed__video-wrap--fullscreen">
+        <img src="https://s.redefine.pl/file/o2/redefine/cp/53/53p2g3rzhitp2d4oq8huhe1an4yn1opo.jpg" alt="test3" class="video-preplay" data-vod="7" >
+      </figure>
+      <script class="viewCountData" type="application/json">
+        {
+          "action": "/icm/",
+          "module_id": "MzI5Mg==",
+          "ELEMENT_ID": 12345,
+          "FK_ELEMENT_TYPES_ID": 4
+        }
+      </script>
+    </article>
+
+  </div>
+  <script>
+    if(!window.preplay){
+      window.preplay = {};
+    }
+    window.preplay["vod7"] = {"mediaItem": {"id": 7,"playback": {"duration": 5,"mediaSources": [{"modificationDate": "2019-07-02, 14:30:32","size": "871669","id": 8,"quality": "740x416","fileFormat": "mp4","accessMethod": "direct","url": "/x.vod?id=8"}],"mediaType": "vod","mediaId": {"id": 7 }},"cpid" : 1,"mediaId": {"id": 7 },"displayInfo": {"title": "test3" }},"ads": {"extraData": [],"tags": ["did:LoveIsland","reqage_0","t_300_t"],"adserver": "http://ipla.hit.stat24.com/ad.xml?id=","placements": [{"id": "jILsTR.KLPfa9w7MsHSp5Ng4sTGItudcMqwUHkXXwqf.H7","position": "video" }]},"reporting": {"gprism": {"service": "http://pro.hit.gemius.pl/redot.gif?l=41/","title": "test3","mediaType": "vod","duration": 5,"accounts": ["d7.q8Y9hI1z3Wpnj6eBpIZYUfcCdbjsgO31fClN_48X.c7" ],"distributor": "LoveIsland","categoryPath": ""},"gstream": {"mediaId": {"id": "li_7" },"service": "http://spl.hit.gemius.pl","title": "test3","mediaType": "vod","distributor": "LoveIsland","accounts": ["chtA4gNrz8zFjXs09houUPUI71YFCibesfMmnvzZZmf.L7" ],"additionalVector": "","duration": 5,"partner": "","keyCategory": "","categories": [""]},"gastream": {"functionalCategory": "D","title": "test3","androidAccounts": ["nSblnPdxCbIX5uFdXzVdF6bl74Es.qcuAXb6RYHevC7.r7"],"iosAccounts": ["nSbrOPdxZF93Kwp5pwUgFvVnj3gpNecAhgq6FMgetKL.57"],"distributor": "LoveIsland","service": "http://gapl.hit.gemius.pl","duration": 5,"partner": "love island","typology": "7","mediaType": "vod","mediaId": {"id": "li_7","cpid": 1}}}};
+  </script>
+
+  <script class="viewCountData" type="application/json">
+    {
+      "action": "/icm/",
+      "module_id": "MzI5Mg==",
+      "ELEMENT_ID": 12345,
+      "FK_ELEMENT_TYPES_ID": 3
+    }
+  </script>
+
+    <!-- <script>
+      var vods = document.querySelectorAll(".video-preplay");
+      if(vods.length > 0){
+        for(var i = 0; i<vods.length; i++) {
+          vods[i].addEventListener('click', function(e) {
+            var id = this.getAttribute("data-vod");
+            var json = window.preplay["vod"+id];
+            json = JSON.stringify(json);
+            Print.postMessage(json);
+          });
+        }
+      }
+    </script> -->
+</body>
+</html>

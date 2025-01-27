@@ -1,0 +1,67 @@
+#!/bin/bash
+
+##################
+##### Skrypt odpowiedzialny za puszczenie joba rsh odpowiedzialnego za kopiowanie templates
+#####
+##### config #####
+quartz='10.0.0.129:8180'
+jobName='RSH3-TEMPLATES-MBTM:RSH3'
+jobGroup='MBTM'
+portalId=151
+##################
+
+
+RED='\033[1;31m'
+GREEN='\033[1;32m'
+NC='\033[0m' # No Color
+
+echo "Startuje zadanie odpowiedzialne za kopiowanie templates dla portalu $jobGroup - $jobName"
+
+response=$(curl -s --write-out "HTTPSTATUS:%{http_code}" -X POST "http://$quartz/quartz-web/quartzService" \
+  -d jobName=$jobName \
+  -d jobGroup=$jobGroup \
+  -d portalId=$portalId \
+  -d operation=fire \
+  -d login=rsh_templates \
+  -d passwd=7da188c2e2d83e38b7d9e75e500f1af8)
+
+triggerName=$(echo $response | sed -e 's/HTTPSTATUS\:.*//g')
+responseStatus=$(echo $response | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
+
+if [ ! $responseStatus -eq 200 ]; then
+  printf "${RED}Job nie został uruchomiony! [HTTP status: $responseStatus]\n${NC}"
+  exit 1
+fi
+
+echo "Job został odpalony: $triggerName"
+
+check() {
+  response=$(curl -s --write-out "HTTPSTATUS:%{http_code}" -X GET "http://$quartz/quartz-web/quartzService?triggerName=$triggerName")
+
+  status=$(echo $response | sed -e 's/HTTPSTATUS\:.*//g')
+  responseStatus=$(echo $response | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
+  
+  if [ $responseStatus -eq 404 ]; then
+    status='NOT FOUND'
+  fi
+}
+
+while : ; do
+  check
+  [ $responseStatus -eq 200 ] && [ $status != "RUNNING" ] && break
+
+  sp='/-\|'
+  for i in $(seq 1 5000)
+  do
+    printf '\rStatus: %s:%s %.1s ' "$responseStatus" "$status" "$sp"
+    sp=${sp#?}${sp%???}
+    sleep .001
+  done
+done
+
+if [ $status == "OK" ]; then
+  printf "\r${GREEN}Job został zakończony ze statusem: $status\n${NC}" 
+else
+  printf "\r${RED}Job został zakończony ze statusem: $status\n${NC}"
+  exit 1
+fi

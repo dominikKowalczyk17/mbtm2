@@ -1,0 +1,71 @@
+.sticky {
+  $top-desktop: $header-main-sticky-height;
+  $top-tablet: $header-main-height;
+  $top-mobile: $header-main-mobile-wide-height;
+
+  transition: $transition-out;
+
+  @include clearfix('before');
+  @include clearfix('after');
+
+  &.is--sticky-top-start,
+  &.is--sticky-bottom-start {
+    position: fixed;
+    transform: translate3d(0, 0, 0);
+    transition: $transition-out;
+  }
+
+  &.is--sticky-top-end,
+  &.is--sticky-bottom-end {
+    position: absolute;
+    bottom: 0;
+  }
+
+  &.is--sticky-top-start {
+    $search-form-height: 58px;
+
+    transition: $transition-in;
+
+    @include mq($desktop-wide, $desktop-narrow) { top: $top-desktop; }
+
+    @include mq($tablet-wide, $tablet-narrow) { top: $top-tablet; }
+
+    @include mq($mobile-wide, $mobile-narrow) { top: $top-mobile; }
+
+    .search-form__state:checked ~ .container & {
+      transform: translate3d(0, $search-form-height, 0);
+    }
+
+    @include mq($min-desktop-narrow) {
+      $translate: $header-main-height + $header-sub-height - $top-desktop;
+
+      .header:not(.is--sticky) ~ .container & {
+        transform: translate3d(0, $translate, 0);
+      }
+
+      .search-form__state:checked ~ .header:not(.is--sticky) ~ .container & {
+        transform: translate3d(0, ($translate + $search-form-height), 0);
+      }
+    }
+
+    .urgent-holder ~ .container__inner & {
+      $urgent-height: 34px;
+
+      @include mq($desktop-wide, $desktop-narrow) { top: ($top-desktop + $urgent-height); }
+
+      @include mq($tablet-wide, $tablet-narrow) { top: ($top-tablet + $urgent-height); }
+
+      @include mq($mobile-wide, $mobile-narrow) { top: ($top-mobile + $urgent-height); }
+    }
+  }
+
+  &.is--sticky-top-end {
+    top: auto !important;
+    transform: translate3d(0, 0, 0) !important;
+  }
+
+  &.is--sticky-bottom-start {
+    top: auto;
+    bottom: 0;
+  }
+}

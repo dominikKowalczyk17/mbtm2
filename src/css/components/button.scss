@@ -1,0 +1,96 @@
+.button {
+  display: inline-block;
+  min-width: 290px;
+  padding: 18px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  line-height: 1;
+  color: $color-light;
+  background: linear-gradient(to bottom, #ff8683 0%, #e72376 100%);
+  box-shadow: inset 0 5px 10px rgba(#f2349b, .3), 0 4px 10px rgba(#d9d9d9, .56);
+  border: 0;
+  border-radius: 5px;
+
+  &--quiz {
+    background: linear-gradient(to bottom, #ffbd76 0%, #f85532 100%);
+    box-shadow: inset 0 5px 10px rgba(#f7613c, .3), 0 4px 12px rgba(#3377c5, .56);
+  }
+
+  &--quiz-answer {
+    width: 100%;
+    min-width: 0;
+    background: #d9f8ff;
+    box-shadow: 0 4px 12px rgba(#3377c5, .56);
+    color: #e72376;
+    font-size: 1.575rem;
+
+    @include mq($mobile) {
+      font-size: 1.8rem;
+    }
+  }
+
+  &:disabled {
+    color: $color-dark-gray;
+    background: $color-light-gray;
+    box-shadow: inset 0 5px 10px rgba($color-dark-gray, .3);
+
+    &:before,
+    &:after {
+      opacity: .7;
+    }
+  }
+
+  &[hidden] {
+    display: none !important;
+  }
+
+  &.is--loading {
+    border-color: $color-dark-gray;
+
+    &:before,
+    &:after {
+      width: 10px;
+      height: 10px;
+      border: 2px solid transparent;
+      border-top: 2px solid currentColor;
+      border-radius: 10px;
+      background: 0 0;
+      animation: rotate .5s infinite linear;
+    }
+
+    &:before {
+      margin: -1px 9px -1px -1px;
+    }
+
+    &:after {
+      margin: -1px -1px -1px 9px;
+    }
+  }
+
+  &__share {
+    display: flex;
+    width: 6rem;
+    height: 3rem;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 6rem;
+    position: absolute;
+    background-color: $color-pink;
+    border: none;
+    left: 50%;
+    bottom: -1rem;
+    transform: translateX(-50%);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    &:before {
+      content: '';
+      position: absolute;
+      background: url("/gfx/icons/share.svg") no-repeat top center / contain;
+      width: 1.5rem;
+      height: 1.66rem;
+      pointer-events: none;
+    }
+  }
+}

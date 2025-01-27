@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+@import './functions';
+@import './variables';
+@import './imports';
+@import './globals';
+@import './components/index';
+
+/**
+ * Usuwam notyfikacje BrowserSync
+ */
+@if ($NODE_ENV == 'development') {
+  #__bs_notify__ {
+    display: none !important;
+  }
+}

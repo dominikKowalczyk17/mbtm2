@@ -1,0 +1,161 @@
+// Fix for: <fieldset> resizes wrong; appears to have unremovable `min-width: min-content`
+// https://stackoverflow.com/questions/17408815/fieldset-resizes-wrong-appears-to-have-unremovable-min-width-min-content
+@-moz-document url-prefix() {
+  fieldset {
+    display: table-cell;
+  }
+}
+
+a {
+  -webkit-user-modify: read-only;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba($color-yellow, .25);
+}
+
+::-moz-selection {
+  background: $color-yellow;
+  color: #000;
+}
+
+::selection {
+  background: $color-yellow;
+  color: #000;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.js-focus-visible {
+  *:focus:not(.focus-visible) {
+    outline: none;
+  }
+
+  .focus-visible {
+    outline: 3px solid $color-yellow;
+  }
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+  position: relative;
+}
+
+body {
+  font-family: $font-main;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  overflow-y: scroll;
+  cursor: default;
+  background: $color-pink;
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    background: url("/gfx/icons/bg.svg") no-repeat top center / contain;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+
+  .is--contest-open & {
+    overflow: hidden;
+  }
+
+  h1, h2, h3, h4, p {
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: $font-weight-normal;
+    line-height: inherit;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: $color-light-blue;
+}
+
+.inside {
+  position: relative;
+  max-width: 1154px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 $page-padding;
+
+  @include clearfix;
+}
+
+.lazy-load {
+  opacity: 0;
+  transition: opacity .5s $easing-in;
+}
+
+.lazy-load--loaded {
+  opacity: 1;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes increase {
+  from {
+    transform: translate(-50%, 0) scaleX(.1);
+    opacity: 1;
+  }
+  to {
+    transform: translate(125%, 0) scaleX(1);
+    opacity: 1;
+  }
+}
+
+@keyframes decrease {
+  from {
+    transform: translate(-125%, 0) scaleX(1);
+    opacity: 1;
+  }
+  to {
+    transform: translate(75%, 0) scaleX(.1);
+    opacity: 1;
+  }
+}
+
+@keyframes dotty {
+  0% {
+    content: '';
+  }
+  25% {
+    content: '.';
+  }
+  50% {
+    content: '..';
+  }
+  75% {
+    content: '...';
+  }
+  100% {
+    content: '';
+  }
+}
