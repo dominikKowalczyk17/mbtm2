@@ -1,65 +1,67 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Must Be The Music - News</title>
 </head>
+
 <body>
-<section class="section--profile">
-    <div class="container">
-        <%= require('html-loader!./status-bar.html') %>
-        <%= require('html-loader!./header.html') %>
-    </div>
+    <section class="section--article section--news">
+        <div class="container">
+            <%= require('html-loader!./status-bar.html') %>
+                <%= require('html-loader!./header.html') %>
+        </div>
 
-    <main class="main">
-        <article class="profile">
-            <header class="profile__header">
-                <img alt="Dawid Kwiatkowski" class="profile__image" src="./gfx/dawid-kwiatkowski.jpg">
-                <button class="button__share" type="button"></button>
-            </header>
+        <main class="main">
+            <article class="article">
+                <header class="article__header">
+                    <img alt="Dawid Kwiatkowski" class="article__image" src="./gfx/dawid-kwiatkowski.jpg">
+                    <button class="button__share" id="share" type="button"></button>
+                </header>
 
-            <section class="profile__bio">
-                <div class="profile__bio__date">
-                    <div class="profile__bio__date-text">1.09.2024</div>
-                    <span class="profile__bio__date-separator"></span>
-                    <div class="profile__bio__date-text">4568 wyświetleń</div>
-                </div>
-                <div class="profile__bio-text">
-                    <p>„Must be the music”: Raper Miuosh za jurorskim stołem</p>
-                </div>
-                <div class="profile__text">
-                    Znany artysta, Autor tekstów i producent muzyczny dołączył do ekipy kultowego programu Polsatu. W
-                    gronie oceniających występy uczestników powracającego po kilkuletniej przerwie talent show są
-                    również Dawid Kwiatkowski, Sebastian Karpiel-Bułecka oraz Natalia Szroeder. Do Macieja Rocka w roli
-                    prowadzących dołączyły Patricia Kazadi i Adam Zdrójkowski.
-                </div>
-            </section>
-            <section class="profile__bio">
-                <div class="profile__bio-text">
-                    <p>Kim jest Miuosh?</p>
-                </div>
-                <div class="profile__text">
-                    Miuosh, czyli Miłosz Borycki, pochodzi z Katowic, w których żyje i tworzy. Pierwsze poważne kroki
-                    muzyczne stawiał w 2001 roku. Oficjalnym wydawnictwem debiutował w 2006 roku (jako zespół Projektor)
-                    a rok później rozpoczął solową karierę. Do dzisiaj wydał 19 albumów, z których 7 uzyskało status
-                    Złotych Płyt, jedna  Platynowej, a dwie Podwójnej Platyny. Jego projekty z Narodową Orkiestrą
-                    Symfoniczną Polskiego Radia odbiły się szerokim echem na całym świecie, a specjalny koncert łączący
-                    dwa z nich w czerwcu 2019 roku zgromadził na Stadionie Śląskim ponad czterdziestotysięczną
-                    publiczność.
-                    Artysta jest również autorem muzyki do spektakli teatralnych i autorem koncertowych projektów
-                    specjalnych. Miał okazję współpracować z najważniejszymi polskimi wykonawcami i muzykami (m.in. z
-                    Igo, Kasią Nosowską, Tomaszem Organkiem, Piotrem Roguckim, Smolikiem, Wojtkiem Waglewskim, Igorem
-                    Herbutem, Ralphem Kaminskim, Krzysztofem Zalewskim, Darią Zawiałow, czy Zespołem Pieśni i Tańca
-                    „Śląsk”.
-                </div>
-                <section class="profile__video">
-                    <figure class="picture">
-                        <img alt="" class="picture__thumbnail" height="193" src="./gfx/picture_cover.jpg">
-                    </figure>
+                <section class="article__bio">
+                    <div class="article__bio__date">
+                        <div class="article__bio__date-text">1.09.2024</div>
+                        <span class="article__bio__date-separator"></span>
+                        <div class="article__bio__date-text">4568 wyświetleń</div>
+                    </div>
+                    <div class="article__bio-text">
+                        <p>„Must be the music”: Raper Miuosh za jurorskim stołem</p>
+                    </div>
+                    <div class="article__text">
+                        Znany artysta, Autor tekstów i producent muzyczny dołączył do ekipy kultowego programu Polsatu. W
+                        gronie oceniających występy uczestników powracającego po kilkuletniej przerwie talent show są
+                        również Dawid Kwiatkowski, Sebastian Karpiel-Bułecka oraz Natalia Szroeder. Do Macieja Rocka w roli
+                        prowadzących dołączyły Patricia Kazadi i Adam Zdrójkowski.
+                    </div>
                 </section>
-                <!--
-                <section class="profile__video">
+                <section class="article__bio">
+                    <div class="article__bio-text">
+                        <p>Kim jest Miuosh?</p>
+                    </div>
+                    <div class="article__text">
+                        Miuosh, czyli Miłosz Borycki, pochodzi z Katowic, w których żyje i tworzy. Pierwsze poważne kroki
+                        muzyczne stawiał w 2001 roku. Oficjalnym wydawnictwem debiutował w 2006 roku (jako zespół Projektor)
+                        a rok później rozpoczął solową karierę. Do dzisiaj wydał 19 albumów, z których 7 uzyskało status
+                        Złotych Płyt, jedna  Platynowej, a dwie Podwójnej Platyny. Jego projekty z Narodową Orkiestrą
+                        Symfoniczną Polskiego Radia odbiły się szerokim echem na całym świecie, a specjalny koncert łączący
+                        dwa z nich w czerwcu 2019 roku zgromadził na Stadionie Śląskim ponad czterdziestotysięczną
+                        publiczność.
+                        Artysta jest również autorem muzyki do spektakli teatralnych i autorem koncertowych projektów
+                        specjalnych. Miał okazję współpracować z najważniejszymi polskimi wykonawcami i muzykami (m.in. z
+                        Igo, Kasią Nosowską, Tomaszem Organkiem, Piotrem Roguckim, Smolikiem, Wojtkiem Waglewskim, Igorem
+                        Herbutem, Ralphem Kaminskim, Krzysztofem Zalewskim, Darią Zawiałow, czy Zespołem Pieśni i Tańca
+                        „Śląsk”.
+                    </div>
+                    <section class="article__video">
+                        <figure class="picture">
+                            <img alt="" class="picture__thumbnail" height="193" src="./gfx/picture_cover.jpg">
+                        </figure>
+                    </section>
+                    <!--
+                <section class="article__video">
                     <figure class="video">
                         <button aria-label="Odtwórz wideo" class="video__play-btn" type="button">
                             <img alt="" class="video__thumbnail" height="193" src="./gfx/video-thumbnail.jpg">
@@ -68,35 +70,36 @@
                     </figure>
                 </section>
                 -->
-            </section>
-            <section class="profile__bio">
-                <div class="profile__text">
-                    Znany artysta, Autor tekstów i producent muzyczny dołączył do ekipy kultowego programu Polsatu. W
-                    gronie oceniających występy uczestników powracającego po kilkuletniej przerwie talent show są
-                    również Dawid Kwiatkowski, Sebastian Karpiel-Bułecka oraz Natalia Szroeder. Do Macieja Rocka w roli
-                    prowadzących dołączyły Patricia Kazadi i Adam Zdrójkowski.
-                </div>
-            </section>
-            <section class="profile__bio">
-                <div class="profile__bio-text">
-                    <p>Nie uważa się już za rapera</p>
-                </div>
-                <div class="profile__text">
-                    Na swoim koncie ma także albumy koncertowe: „2015” (2015, wspólnie z Jimkiem i Narodową Orkiestrą
-                    Symfoniczną Polskiego Radia), „Panowie z Katowic. Live” (2016, wspólnie z FDG Orkiestrą),
-                    „Miuosh/Smolik/NOSPR” (2018, wspólnie z Andrzejem Smolikiem i Narodową Orkiestrą Symfoniczną
-                    Polskiego Radia) oraz „Pieśni współczesne. Live at Cavatina Hall” (2022, wspólnie z Zespołem Pieśni
-                    i Tańca „Śląsk”). W międzyczasie ukazały wydawnictwa zespołów Projektor „Remiraż” (2011) i 19SWC
-                    „Dziewiętnaście stopni w cieniu” (2012), z którymi był związany.
-                    W trakcie swojej kariery Miuosh miał okazję współpracować między innymi z Igo, Kasią Nosowską,
-                    Tomaszem Organkiem, Piotrem Roguckim, Smolikiem, Wojciechem Waglewskim, Igorem Herbutem, Ralphem
-                    Kaminskim, Krzysztofem Zalewskim, Darią Zawiałow, Zespołem Pieśni i Tańca „Śląsk”, jak również
-                    Pokahontaz, Hemp Gru, Paluchem, Onarem, Donatanem czy Vieniem.
-                </div>
-                <%= require('html-loader!./social-component.html') %>
-            </section>
-        </article>
-    </main>
-</section>
+                </section>
+                <section class="article__bio">
+                    <div class="article__text">
+                        Znany artysta, Autor tekstów i producent muzyczny dołączył do ekipy kultowego programu Polsatu. W
+                        gronie oceniających występy uczestników powracającego po kilkuletniej przerwie talent show są
+                        również Dawid Kwiatkowski, Sebastian Karpiel-Bułecka oraz Natalia Szroeder. Do Macieja Rocka w roli
+                        prowadzących dołączyły Patricia Kazadi i Adam Zdrójkowski.
+                    </div>
+                </section>
+                <section class="article__bio">
+                    <div class="article__bio-text">
+                        <p>Nie uważa się już za rapera</p>
+                    </div>
+                    <div class="article__text">
+                        Na swoim koncie ma także albumy koncertowe: „2015” (2015, wspólnie z Jimkiem i Narodową Orkiestrą
+                        Symfoniczną Polskiego Radia), „Panowie z Katowic. Live” (2016, wspólnie z FDG Orkiestrą),
+                        „Miuosh/Smolik/NOSPR” (2018, wspólnie z Andrzejem Smolikiem i Narodową Orkiestrą Symfoniczną
+                        Polskiego Radia) oraz „Pieśni współczesne. Live at Cavatina Hall” (2022, wspólnie z Zespołem Pieśni
+                        i Tańca „Śląsk”). W międzyczasie ukazały wydawnictwa zespołów Projektor „Remiraż” (2011) i 19SWC
+                        „Dziewiętnaście stopni w cieniu” (2012), z którymi był związany.
+                        W trakcie swojej kariery Miuosh miał okazję współpracować między innymi z Igo, Kasią Nosowską,
+                        Tomaszem Organkiem, Piotrem Roguckim, Smolikiem, Wojciechem Waglewskim, Igorem Herbutem, Ralphem
+                        Kaminskim, Krzysztofem Zalewskim, Darią Zawiałow, Zespołem Pieśni i Tańca „Śląsk”, jak również
+                        Pokahontaz, Hemp Gru, Paluchem, Onarem, Donatanem czy Vieniem.
+                    </div>
+                    <%= require('html-loader!./social-component.html') %>
+                </section>
+            </article>
+        </main>
+    </section>
 </body>
+
 </html>

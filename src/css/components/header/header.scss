@@ -1,11 +1,12 @@
-html:has(.header__menu-toggle:checked) {
+html:has(.header-nav__menu-toggle:checked) {
   overflow: hidden;
   height: 100vh;
 }
 
-.header {
+.header-nav {
   margin: 1.6rem 2.4rem 0 1.7rem;
   background: transparent;
+  position: relative;
 
   &__nav {
     display: flex;
@@ -59,11 +60,11 @@ html:has(.header__menu-toggle:checked) {
     &-toggle {
       display: none;
 
-      &:checked ~ .header__menu-dropdown {
+      &:checked ~ .header-nav__menu-dropdown {
         display: block;
       }
 
-      &:checked ~ .header__menu-btn {
+      &:checked ~ .header-nav__menu-btn {
 
       }
     }
@@ -91,7 +92,7 @@ html:has(.header__menu-toggle:checked) {
         z-index: 9999;
       }
 
-      .header__menu-close {
+      .header-nav__menu-close {
         background: url("/gfx/icons/close.svg") no-repeat top center / contain;
         width: 2rem;
         height: 2rem;

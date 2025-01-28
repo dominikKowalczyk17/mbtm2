@@ -83,10 +83,14 @@ class ShareDialog {
 
   bindEvents() {
     // Share button clicks
-    Events.on(document.body, 'click', delegate(this.matches, (event) => {
-      event.preventDefault();
-      this.show();
-    }));
+    Events.on(
+      document.body,
+      'click',
+      delegate(this.matches, (event) => {
+        event.preventDefault();
+        this.show();
+      })
+    );
 
     // Close on overlay click and outside clicks
     Events.on(this.dialogEl, 'click', this.handleOutsideClick);
@@ -128,18 +132,17 @@ class ShareDialog {
     const shareData = {
       title: 'Must be the music: Raper Miuosh za jurorskim stołem',
       text: 'Sprawdź najnowsze wiadomości z Must Be The Music!',
-      url: window.location.href
+      url: window.location.href,
     };
 
     // Check for native sharing support
     if (navigator.share) {
-      navigator.share(shareData)
+      navigator
+        .share(shareData)
         .then(() => {
-          console.log('Shared successfully');
           this.hide();
         })
-        .catch((error) => {
-          console.warn('Error sharing:', error);
+        .catch(() => {
           this.fallbackShare(platform, shareData);
         });
     } else {
@@ -152,7 +155,7 @@ class ShareDialog {
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareData.url)}`,
       twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareData.text)}&url=${encodeURIComponent(shareData.url)}`,
       messenger: `fb-messenger://share/?link=${encodeURIComponent(shareData.url)}`,
-      whatsapp: `whatsapp://send?text=${encodeURIComponent(shareData.text + ' ' + shareData.url)}`
+      whatsapp: `whatsapp://send?text=${encodeURIComponent(shareData.text + ' ' + shareData.url)}`,
     };
 
     if (platformUrls[platform]) {

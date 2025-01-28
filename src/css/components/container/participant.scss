@@ -1,0 +1,22 @@
+.article {
+    &--participant {
+        // Similar to juror but with specific modifications
+        .article__hero {
+            &-meta {
+                margin-bottom: $spacing-xxxxxs;
+            }
+        }
+
+        .article__title {
+            display: inline-block;
+            margin-bottom: $spacing-xxxxxs;
+            
+            h1 {
+                font-weight: $font-weight-light;
+                font-size: $font-size-lg;
+                max-width: 25rem;
+                text-align: center;
+            }
+        }
+    }
+}

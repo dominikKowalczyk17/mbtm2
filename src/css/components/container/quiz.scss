@@ -1,0 +1,179 @@
+.quiz {
+  &__state {
+    display: none;
+  }
+
+  &__step {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    max-width: 100%;
+
+    &--end {
+      margin-top: -4.5%;
+    }
+  }
+
+  @for $i from 1 to 21 {
+    .quiz__state:nth-of-type(#{$i}):not(:checked) ~ &__step:nth-of-type(#{$i}) { display: none; }
+  }
+
+  &__answers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0 -2.3%;
+
+    @include mq('(max-width: 859px)') {
+      margin: 0 0 0 -2%;
+    }
+
+    @include mq($mobile) {
+      margin: 0 24px;
+    }
+  }
+
+  &__answer {
+    width: 22.7%;
+    min-width: 170px;
+    margin: 0 0 20px 2.3%;
+
+    @include mq('(max-width: 859px)') {
+      width: 48%;
+      min-width: 0;
+      margin: 0 0 10px 2%;
+    }
+
+    @include mq($mobile) {
+      width: 100%;
+      min-width: 0;
+      margin: 0 0 20px 0;
+    }
+  }
+
+  &__button {
+    position: relative;
+
+    &.is--active {
+      top: 1px;
+      box-shadow: none;
+      background: #e72376;
+      color: #fff;
+    }
+
+    &.is--valid {
+      transition: background .4s;
+      background: #2ad957;
+      color: #fff;
+
+      &:before {
+        content: '';
+        float: right;
+        width: 32px; height: 32px;
+        margin: -8px -8px -8px 10px;
+        background: url(../gfx/ico-valid.png) no-repeat center / contain;
+      }
+    }
+
+    &.is--invalid {
+      transition: background .4s;
+      background: #ec4242;
+      color: #fff;
+
+      &:before {
+        content: '';
+        float: right;
+        width: 32px; height: 32px;
+        margin: -8px -8px -8px 10px;
+        background: url(../gfx/ico-invalid.png) no-repeat center / contain;
+      }
+    }
+
+    &.is--valid,
+    &.is--invalid {
+      &:before {
+        @include mq($mobile) {
+          width: 25px; height: 25px;
+          margin: -4px 0 -4px 10px;
+        }
+      }
+    }
+  }
+
+  &__result {
+    position: relative;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+
+    @include mq($tablet) {
+      width: 220px; height: 220px;
+      margin: -40px auto 0;
+      padding-top: 36px;
+      border-radius: 220px;
+      font-size: 1.875rem;
+      background: linear-gradient(to bottom, #ffbd76 0%, #f85532 100%);
+      box-shadow: inset 0 5px 10px rgba(#f7613c, .3), 0 4px 12px rgba(#3377c5, .56);
+    }
+
+    @include mq($mobile) {
+      font-size: 2.4rem;
+      margin-top: 25px;
+    }
+
+    &-digit {
+      line-height: 1;
+      letter-spacing: -.01em;
+      white-space: nowrap;
+
+      @include mq($mobile) {
+        width: 174px; height: 174px;
+        margin: 25px auto;
+        padding-top: 36px;
+        border-radius: 174px;
+        font-size: 1.875rem;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+        background: linear-gradient(to bottom, #ffbd76 0%, #f85532 100%);
+        box-shadow: inset 0 5px 10px rgba(#f7613c, .3), 0 4px 12px rgba(#3377c5, .56);
+      }
+    }
+
+    &-valid {
+      font-size: 11rem;
+      letter-spacing: -.05em;
+
+      @include mq($mobile) {
+        font-size: 8.66rem;
+      }
+    }
+
+    &-all {
+      font-size: 5.575rem;
+
+      @include mq($mobile) {
+        font-size: 4.5rem;
+      }
+    }
+
+    &-text {
+      color: #fff;
+      font-size: 2.5rem;
+      margin: 2rem 0 2.5rem 0;
+      line-height: 2.5rem;
+      font-weight: 600;
+    }
+  }
+
+  &__share {
+    @include mq($tablet) {
+      position: absolute !important;
+      left: 120%;
+      top: 10px;
+    }
+  }
+}

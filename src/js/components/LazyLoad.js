@@ -4,7 +4,7 @@
  */
 
 import Events from '../utils/Events';
-import placeholder from '../../gfx/placeholder.png';
+//import placeholder from '../../gfx/placeholder.png';
 
 class LazyLoad {
   constructor (parent = document) {

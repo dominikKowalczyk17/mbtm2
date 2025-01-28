@@ -1,0 +1,733 @@
+$transitions: true;
+
+@mixin contest-button {
+  position: fixed;
+  left: 30px; right: 30px; bottom: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  max-width: 380px;
+  height: 53px;
+  margin: 0 auto;
+  padding: 0;
+  font-family: $font-main;
+  font-size: 1.7rem;
+  font-weight: bold;
+  line-height: 1;
+  color: $color-light;
+  border: 0;
+  border-radius: 9px;
+  background: url(../gfx/button-quiz.png) center/cover no-repeat #ed3d79;
+  box-shadow: 0 5px 21px rgba(#d9d9d9, .56);
+}
+
+.contest {
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 11;
+  display: flex;
+  flex-flow: column;
+  width: 100%; height: 100%;
+  text-align: center;
+  background: url(../gfx/puchar.svg?fill=#262628&opacity=0.6) no-repeat #eeeeee;
+  background-position: -200px 36px;
+  background-position: calc(50% - 35vw) 36px;
+  background-size: auto 80%;
+  background-size: auto calc(100vh - 120px);
+  overflow: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  visibility: hidden;
+  transform: translate(0, 100%);
+
+  @if ($transitions) {
+    transition: transform .3s $easing-out, visibility 0s .3s;
+  }
+
+  &.is--terms { overflow: hidden; }
+
+  &-state { display: none; }
+
+  &-open {
+    @include contest-button();
+
+    z-index: 10;
+    transform: translate(0, 150%);
+    transition: $transition-out;
+
+    &-shadow {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 9;
+      height: 180px;
+      background: linear-gradient(to bottom, rgba(#fff, 0) 0%, rgba(#fff, 1) 70%);
+      transform: translate(0, 150%);
+      transition: $transition-out;
+      pointer-events: none;
+
+      .contest-form & {
+        transform: none;
+      }
+
+      // &:after {
+      //   content: '';
+      //   position: fixed;
+      //   left: 0;
+      //   bottom: 0;
+      //   z-index: -1;
+      //   display: block;
+      //   background: url(/gfx/shadow.png) no-repeat center / 105% 100%;
+      //   width: 320px;
+      //   min-width: 100%;
+      //   height: 100px;
+      // }
+    }
+
+    .contest.is--progress ~ & {
+      font-size: 0;
+
+      &:before {
+        content: 'Trwa wysy''ł''anie';
+        font-size: 1.9rem;
+      }
+
+      &:after {
+        content: '';
+        width: 16px; height: auto;
+        margin: 0;
+        background: 0 0;
+        font-size: 1.9rem;
+        text-align: left;
+        animation: dotty 3s infinite;
+      }
+    }
+  }
+
+  &.is--progress ~ &-open,
+  &-state:not([hidden]) ~ &-open,
+  &.is--progress ~ &-open-shadow,
+  &-state:not([hidden]) ~ &-open-shadow {
+    transform: none;
+    transition: $transition-in .5s;
+  }
+
+  &-state:checked ~ & {
+    visibility: visible;
+    transform: none;
+
+    @if ($transitions) {
+      transition: transform .25s $easing-in;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 0; right: 0;
+    width: 56px; height: 56px;
+    padding: 0;
+    border: 0;
+    background: 0 0;
+    white-space: nowrap;
+    text-indent: 100%;
+    overflow: hidden;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      margin: -8px;
+      width: 16px; height: 16px;
+      background: url(../gfx/close.png) no-repeat center / contain;
+    }
+  }
+
+  &__box {
+    width: 100%;
+    max-width: 548px;
+    margin: auto;
+    padding: 56px 30px 130px;
+  }
+
+  &__pre-title {
+    padding: 8px 12px 4px 12px;
+    font-family: $font-sub;
+    font-size: 1.725rem;
+    font-weight: bold;
+    line-height: 1em;
+    text-transform: uppercase;
+    color: #000;
+    background: #fff;
+    border: 2px solid $color-pink-dark;
+    border-radius: 5px;
+  }
+
+  &__title {
+    margin: 28px 0 28px;
+    font-size: 1.8rem;
+    font-weight: normal;
+    line-height: 1.25;
+  }
+
+  // form
+  &-form {
+    .contest.is--progress &,
+    .contest.is--success &,
+    .contest.is--error & {
+      display: none;
+    }
+
+    &__field {
+      position: relative;
+      display: flex;
+      flex-flow: column;
+      margin: 10px auto;
+      text-align: left;
+    }
+
+    &__input {
+      width: 100%;
+      height: 54px;
+      margin: 26px 0 0;
+      padding: 0 20px;
+      line-height: 1.5;
+      background: #fff;
+      border: 3px solid #fff;
+      border-radius: 5px;
+      color: $color-dark;
+      outline: none !important;
+      box-shadow: none !important;
+
+      &:not(&--textarea).focus-visible,
+      &:not(&--textarea):focus {
+        border-color: $color-pink-dark;
+      }
+
+      &[type='number'] {
+        -moz-appearance: textfield;
+        appearance: textfield;
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+        }
+      }
+
+      &::-ms-clear { display: none; }
+
+      // --textarea
+      &--textarea {
+        min-height: 170px;
+        padding: 16px 20px;
+        resize: none;
+        border: 1px solid #d3d3d3;
+      }
+
+      // --file
+      &--file {
+        position: relative;
+        z-index: 1;
+        width: 100%; height: 54px;
+        margin: 0 auto;
+        padding: 0;
+        overflow: hidden;
+        opacity: 0;
+        caret-color: transparent;
+      }
+
+      &--file ~ .contest-form__label {
+        &:before { content: 'Za''łą''cz pliki:'; }
+      }
+
+      &--file ~ &-helper {
+        @include contest-button();
+
+        position: relative;
+        left: auto; right: auto; bottom: auto;
+        width: 100%;
+        max-width: none;
+        margin: -54px auto 10px;
+        text-shadow: none;
+        background: #fff;
+        color: $color-pink-dark;
+
+        &:before { content: 'Dodaj plik +'; }
+
+        &:after { display: none; }
+      }
+
+      &--file.is--loading ~ &-helper {
+        &:before { display: none; }
+        &:after {
+          content: '';
+          display: block;
+          width: 20px; height: 20px;
+          border-width: 2px;
+          border-style: solid;
+          border-color: $color-pink-dark transparent transparent;
+          border-radius: 50%;
+          background: 0 0;
+          animation: rotate .5s infinite linear;
+        }
+      }
+
+      .contest-file-list:not(:empty) ~ &--file ~ .contest-form__label {
+        &:before { content: 'Za''łą''czone pliki:'; }
+      }
+
+      .contest.is--no-form-data .contest-file-list:not(:empty) ~ &--file,
+      .contest.is--no-form-data .contest-file-list:not(:empty) ~ &--file ~ &-helper { display: none; }
+
+      &--file.focus-visible ~ &-helper {
+        outline: 3px solid $color-yellow;
+      }
+
+      // --checkbox
+      &--checkbox {
+        position: absolute;
+        right: 100%;
+        width: 0; height: 0;
+        margin: 0;
+        opacity: 0;
+      }
+
+      &--checkbox ~ .contest-form__label {
+        position: relative;
+        z-index: 1;
+        display: block;
+        clear: both;
+        padding: 5px 0 5px 55px;
+        font-size: 1.425rem;
+        line-height: 1.2;
+        color: #000;
+
+        & .contest-form__terms {
+          color: $color-pink-dark !important;
+          font-weight: bold;
+        }
+      }
+
+      &--checkbox.is--error ~ .contest-form__label a { color: inherit; }
+
+      &--checkbox ~ &-helper {
+        position: absolute;
+        top: 0; left: 12px;
+        width: 27px; height: 27px;
+        margin: 0;
+        overflow: hidden;
+        background: #fff;
+        border: 3px solid #e72376;
+        border-radius: 5px;
+      }
+
+      &--checkbox.is--error ~ &-helper {
+        border-color: $color-pink-dark;
+      }
+
+      &--checkbox ~ &-helper:after {
+        content: '';
+        position: absolute;
+        left: 50%; top: 50%;
+        width: 16px; height: 16px;
+        margin: -8px;
+        background: url(../gfx/tick.svg?fill=#fff) no-repeat center / contain;
+        transform: scale(0);
+        transition: transform .1s $easing-out;
+      }
+
+      &--checkbox:active ~ &-helper,
+      &--checkbox.focus-visible ~ &-helper {
+        border-color: #3459c9;
+      }
+
+      &--checkbox.focus-visible ~ &-helper {
+        outline: 3px solid $color-yellow;
+      }
+
+      &--checkbox:active ~ &-helper {
+        transition: border-color .1s .1s;
+      }
+
+      &--checkbox:checked ~ &-helper:after {
+        transform: scale(1);
+        transition: transform .05s $easing-in;
+      }
+
+      // is--error
+      &.is--error {
+        border: 2px solid $color-pink-dark;
+      }
+
+      &--textarea.is--error {
+        padding-left: 35px;
+
+        &::placeholder {
+          color: $color-pink-dark;
+          opacity: 1;
+        }
+      }
+    }
+
+    &__label {
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.725rem;
+      line-height: 1;
+      padding-bottom: 11px;
+      color: #9d9d9d;
+      font-family: $font-sub;
+    }
+
+    &__info {
+      display: block;
+      margin: 5px 0 0;
+      font-size: 1.425rem;
+      color: #7a7a7a;
+      text-align: right;
+
+      &--error {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 30px 0 20px 0;
+        font-size: 1.725rem;
+        color: #fff;
+        text-align: center;
+        background-color: #000;
+        padding: 8px 8px;
+        border-radius: 5px;
+
+        @include mq($mobile) {
+          margin: 20px 0 10px 0;
+        }
+
+        &:before {
+          content: '';
+          flex: 0 0 auto;
+          align-self: center;
+          width: 16px; height: 16px;
+          margin: 1px 6px 0 0;
+          background: url(../gfx/alert.svg?fill=#fff) no-repeat center / contain;
+        }
+      }
+    }
+
+    &__input.is--error ~ &__info:not(#{&}__info--error) {
+      display: none;
+    }
+
+    &__button {
+      @include contest-button();
+
+      z-index: 10;
+
+      .contest-form__button--submit:disabled ~ & {
+        font-size: 0;
+        color: $color-dark-gray;
+        background: #333;
+        box-shadow: inset 0 5px 10px rgba($color-dark-gray, .3);
+        text-shadow: none;
+
+        &:before {
+          content: 'Ł''adowanie';
+          font-size: 1.9rem;
+        }
+
+        &:after {
+          content: '';
+          width: 16px; height: auto;
+          margin: 0;
+          background: 0 0;
+          font-size: 1.9rem;
+          text-align: left;
+          animation: dotty 1.5s infinite;
+        }
+      }
+    }
+  }
+
+  // file
+  &-file {
+    &-list {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 26px 0 0;
+      padding: 0;
+      list-style: none;
+
+      &:not(:empty) { margin-top: 30px; }
+
+      @include mq($mobile) { margin-left: -16px; }
+      @include mq($tablet) { margin-left: -12px; }
+    }
+
+    @include mq($mobile) {
+      width: 50%;
+      padding-left: 16px;
+      margin-bottom: 16px;
+    }
+
+    @include mq($tablet) {
+      width: 25%;
+      padding-left: 12px;
+      margin-bottom: 12px;
+    }
+
+    &.is--removed {
+      transform: scale(0);
+      transition: transform .2s $easing-out;
+    }
+
+    &__figure {
+      @include aspect(16, 9);
+
+      position: relative;
+      margin: 0; padding: 0;
+      background: url('../gfx/attachment.svg?fill=#333 #bg& fill=#ccc #fg') no-repeat center #333;
+      background-size: contain;
+
+      .contest-file.is--error & {
+        margin: -3px;
+        border: 3px solid $color-pink-dark;
+      }
+    }
+
+    &__canvas {
+      @include fill;
+      @include object-fit(cover);
+
+      background: #333;
+      transition: opacity .3s $easing-in;
+
+      &.is--loading,
+      .contest-file.is--error-name & {
+        opacity: 0;
+      }
+    }
+
+    &__remove {
+      position: absolute;
+      right: 0; top: 0;
+      width: 38px; height: 38px;
+      padding: 0; margin: 0;
+      overflow: hidden;
+      border: 0;
+      background: 0 0;
+      white-space: nowrap;
+      text-indent: 100%;
+
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        top: 50%; left: 50%;
+      }
+
+      &:before {
+        width: 26px; height: 26px;
+        margin: -13px;
+        border-radius: 26px;
+        background: #1d1d1f;
+      }
+
+      &:after {
+        width: 12px; height: 12px;
+        margin: -6px;
+        background: url(../gfx/close.svg) no-repeat center / contain;
+      }
+
+      &:hover {
+        &:before { background: $color-pink-dark; }
+      }
+    }
+  }
+
+  // status
+  &-status {
+    display: none;
+    margin: 100px 0;
+    text-align: center;
+
+    .contest.is--progress &,
+    .contest.is--success &,
+    .contest.is--error & { display: block; }
+
+    &__box { display: none; }
+
+    .contest.is--progress &__box--progress,
+    .contest.is--success &__box--success,
+    .contest.is--error &__box--error { display: block; }
+
+    &__icon {
+      position: relative;
+      display: inline-block;
+      width: 140px; height: 140px;
+      border-radius: 100%;
+
+      &:after {
+        @include fill;
+
+        content: '';
+        background: none no-repeat center / contain;
+
+        .contest.is--success & {
+          background-image: url(../gfx/contest-success.png);
+        }
+
+        .contest.is--error & {
+          background-image: url(../gfx/contest-error.png);
+        }
+
+        .contest.is--progress & {
+          width: 114px; height: 114px;
+          margin: 13px;
+          border: 1px solid #626262;
+          border-radius: 100%;
+        }
+      }
+    }
+
+    &__progress {
+      width: 120px;
+      height: 120px;
+      margin: 10px;
+
+      circle {
+        fill: transparent;
+        stroke: #626262;
+        transform: rotate(-90deg);
+        transform-origin: center;
+        transition: stroke-dashoffset .2s;
+      }
+
+      text {
+        font-family: $font-main;
+        font-size: 2.25rem;
+        font-weight: bold;
+        fill: $color-pink-dark;
+      }
+
+      .contest.is--no-form-data & {
+        animation: rotate .5s infinite linear;
+
+        circle {
+          fill: none;
+          stroke-dashoffset: 225 !important;
+        }
+
+        text {
+          display: none;
+        }
+      }
+
+      .contest.is--success &,
+      .contest.is--error & {
+        display: none;
+      }
+    }
+
+    &__text {
+      margin: 15px 0 0;
+      font-family: $font-sub;
+      font-size: 1.8rem;
+      font-weight: normal;
+      color: #6b6b6b;
+
+      .contest.is--progress &:after {
+        content: '';
+        position: absolute;
+        animation: dotty 3s infinite;
+      }
+
+      &-small {
+        margin: 10px 0 -2px;
+        color: #9d9d9d;
+      }
+    }
+
+    &__button {
+      width: 100%;
+      margin: 40px auto 0;
+      background: #fff;
+      text-shadow: none;
+      color: $color-pink-dark;
+      box-shadow: 0 5px 21px rgba(#d9d9d9, .56);
+    }
+  }
+
+  // terms
+  &-terms {
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 10;
+    width: 100%; height: 100%;
+    background: url(../gfx/puchar.svg?fill=#262628&opacity=0.6) no-repeat #eee;
+    background-position: -200px 36px;
+    background-position: calc(50% - 35vw) 36px;
+    background-size: auto 80%;
+    background-size: auto calc(100vh - 120px);
+    overflow: hidden;
+    visibility: hidden;
+    transform: translate(0, 100%);
+
+    @if ($transitions) {
+      transition: transform .3s $easing-out, visibility 0s .3s;
+    }
+
+    .contest.is--terms & {
+      visibility: visible;
+      transform: none;
+
+      @if ($transitions) {
+        transition: transform .25s $easing-in;
+      }
+    }
+
+    &__close {
+      z-index: 1;
+    }
+
+    &__content-wrap {
+      position: absolute;
+      top: 0; left: 0;
+      right: 0; bottom: 0;
+      overflow: hidden;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    &__content {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px 30px 77px;
+      font-size: 1.4rem;
+      font-weight: 300;
+      line-height: 1.5;
+      text-align: left;
+      color: #000;
+
+      h1, h2, h3, h4, h5 {
+        color: #000;
+      }
+
+      h1 {
+        margin: 56px 0 40px;
+        font-family: $font-sub;
+        font-size: 1.8rem;
+        font-weight: normal;
+        letter-spacing: .1em;
+        text-align: center;
+      }
+
+      h2, h3, h4, h5 {
+        font-size: 1.4rem;
+        font-weight: bold;
+      }
+
+      a {
+        color: $color-pink-dark;
+      }
+    }
+  }
+}

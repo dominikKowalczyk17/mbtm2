@@ -1,0 +1,193 @@
+.polling {
+  &__input {
+    display: none;
+  }
+
+  &__answers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0 -1.5%;
+
+    @include mq($mobile) {
+      margin: 0 0 0 -2%;
+    }
+  }
+
+  &__answer {
+    width: 23.4%;
+    min-width: 160px;
+    margin: 0 0 14px 1.5%;
+
+    @include mq($mobile) {
+      width: 48%;
+      min-width: 0;
+      margin: 0 0 10px 2%;
+    }
+  }
+
+  &__label {
+    display: block;
+    position: relative;
+    top: 0;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 8px 10px rgba(#f0307f, .5);
+    transition: opacity .3s;
+
+    .polling.is--loading &,
+    .polling__input:disabled ~ & {
+      opacity: .5;
+    }
+
+    .polling__input:checked ~ & {
+      top: 1px;
+      box-shadow: none;
+    }
+  }
+
+  &__figure {
+    position: relative;
+    margin: 0; padding: 0;
+    background: $color-bg;
+    overflow: hidden;
+
+    @include aspect(205, 200);
+  }
+
+  &__img {
+    @include fill;
+    @include object-fit(cover);
+  }
+
+  &__wrap {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+  }
+
+  &__title {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 0;
+    max-height: 34%;
+    padding: 15px;
+    font-size: 1.9rem;
+    font-weight: bold;
+    line-height: 1;
+    color: #e72376;
+    text-align: center;
+    background: #fff;
+    transition: max-height .3s;
+
+    .polling__answer:hover & {
+      max-height: 100%;
+      overflow: auto;
+    }
+
+    .polling__answer.is--active & {
+      background: #e72376;
+      color: #fff;
+    }
+
+    .polling__wrap & {
+      position: relative;
+      max-height: 3.6em;
+      flex: 0 0 auto;
+      padding: 0;
+      border: 10px solid transparent;
+      overflow: hidden;
+      line-height: 1.2;
+      box-sizing: content-box;
+      transition: none;
+
+      &:hover {
+        padding: 10px;
+        border: 0;
+        max-height: 100%;
+        overflow: auto;
+        box-sizing: border-box;
+      }
+    }
+
+    @include mq($mobile) {
+      padding: 12px;
+      font-size: 1.5rem;
+    }
+  }
+
+  &__results-html { display: none; }
+
+  &__result {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 32%;
+    font-size: 4.1rem;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    background: rgba(#000, .7);
+
+    .polling__wrap & {
+      position: relative;
+      padding-top: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    @include mq($mobile) {
+      font-size: 3.3rem;
+    }
+  }
+
+  &__msg {
+    &--success {
+      padding: 80px 20px 70px;
+      font-size: 1.8rem;
+      text-align: center;
+      background: #fff;
+      border-radius: 5px;
+      box-shadow: 0 8px 10px rgba(#f0307f, .5);
+
+      @include mq($tablet) {
+        max-width: 420px;
+        padding: 20px 20px 35px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      &:before {
+        content: '';
+        display: block;
+        width: 90px;
+        height: 98px;
+        margin: 0 auto 35px;
+        background: url(../gfx/ico-success.png) no-repeat center / contain;
+
+        @include mq($tablet) {
+          margin-bottom: 25px;
+        }
+      }
+    }
+
+    &--error {
+      max-width: 420px;
+      margin: 10px auto;
+      padding: 10px 15px;
+      background: #000;
+      border-radius: 5px;
+      text-align: center;
+      color: #fff;
+    }
+  }
+}

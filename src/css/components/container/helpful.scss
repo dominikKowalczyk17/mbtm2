@@ -1,0 +1,305 @@
+/**
+ * Credits: https://css-tricks.com/recreating-the-twitter-heart-animation/
+ */
+
+$bubble-d: 7.7rem; // bubble diameter
+$bubble-r: .5*$bubble-d; // bubble-radius
+$particle-d: .6rem;
+$particle-r: .5*$particle-d;
+$animation-duration: 1.25s;
+$color-primary: $color-pink-dark;
+
+@mixin particles($k, $saturate) {
+  $shadow-list: ();
+  $n-groups: 7;
+  $group-base-angle: 360deg/$n-groups;
+  $group-distr-r: (1 + $k*.25)*$bubble-r;
+  $n-particles: 2;
+  $particle-base-angle: 360deg/$n-particles;
+  $particle-off-angle: 60deg; // offset angle from radius
+  $spread-r: -$k*1.1*$particle-r;
+
+  @for $i from 0 to $n-groups {
+    $group-curr-angle: $i*$group-base-angle - 90deg;
+    $xg: $group-distr-r*cos($group-curr-angle);
+    $yg: $group-distr-r*sin($group-curr-angle);
+
+    @for $j from 0 to $n-particles {
+      $particle-curr-angle: $group-curr-angle + 
+        $particle-off-angle + $j*$particle-base-angle;
+      $xs: $xg + $particle-d*cos($particle-curr-angle);
+      $ys: $yg + $particle-d*sin($particle-curr-angle);
+
+      $shadow-list: $shadow-list, $xs $ys 0 $spread-r 
+        hsl(($i + $j)*$group-base-angle, $saturate, 75%);
+    }
+  }
+
+  box-shadow: $shadow-list;
+}
+
+@mixin bubble($ext) {
+  transform: scale(1);
+  border-width: $ext;
+}
+
+@keyframes helpful-circle {
+  0%,
+  30% { opacity: 0; }
+  60% { opacity: 1; }
+}
+
+@keyframes helpful-thumb {
+  0%,
+  17.5% { transform: scale(0) rotate(30deg); }
+}
+
+@keyframes helpful-thumb-yes {
+  0%,
+  17.5% { transform: translate(-50%, -50%) scale(0) rotate(30deg); }
+}
+
+@keyframes helpful-thumb-no {
+  0%,
+  17.5% { transform: translate(-50%, -50%) rotate(180deg) scale(0) rotate(30deg); }
+}
+
+@keyframes helpful-bubble {
+  15% { @include bubble($bubble-r); }
+
+  30%,
+  100% { @include bubble(0); }
+}
+
+@keyframes helpful-particles {
+  0%,
+  20% { opacity: 0; }
+
+  25% {
+    @include particles(0, 100%);
+
+    opacity: 1;
+  }
+}
+
+@keyframes helpful-particles-grayscale {
+  0%,
+  20% { opacity: 0; }
+
+  25% {
+    @include particles(0, 0%);
+
+    opacity: 1;
+  }
+}
+
+.helpful {
+  font-size: 0;
+  text-align: center;
+
+  &__state { display: none; }
+
+  &__title {
+    position: relative;
+    font-size: 1.676rem;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: $color-light;
+      opacity: 0;
+    }
+
+    &:after {
+      content: 'Dzi''ę''kujemy za ocen''ę';
+      position: relative;
+      z-index: 1;
+      display: block;
+      font-size: 0;
+    }
+
+    &[data-thanks]:after {
+      content: attr(data-thanks);
+    }
+
+    .helpful__state:checked ~ & {
+      font-size: 0;
+      transition: font-size 0s (2 * $animation-duration);
+
+      &:before {
+        opacity: 1;
+        transition: opacity ($animation-duration * .5) ($animation-duration * 1.5);
+      }
+
+      &:after {
+        padding: 40px 0 10px;
+        font-size: 1.676rem;
+        transition:
+          font-size 0s (2 * $animation-duration),
+          padding 0s (2 * $animation-duration);
+      }
+    }
+  }
+
+  &__button {
+    position: relative;
+    display: inline-block;
+    width: 50px; height: 50px;
+    margin: 30px 10px 0;
+    padding: 0;
+    background: 0 0;
+    border: 0;
+    cursor: pointer;
+
+    @include mq($mobile) {
+      margin: 30px 3px 0;
+    }
+
+    @for $i from 1 through 5 {
+      &--#{$i}:after { background: url(../gfx/li_icon_#{$i}.png) no-repeat center; }
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border-radius: 100%;
+      transition: transform .3s;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      z-index: 1;
+      width: 100%; height: 100%;
+      margin: 0;
+      background-size: contain;
+      transform: translate(-50%, -50%);
+    }
+
+    &--yes:after { margin: 1px 0 0; }
+    &--no:after { margin: 1px 0 0; }
+
+    .helpful__button-helper {
+      position: absolute;
+      top: 50%; left: 50%;
+      z-index: -1;
+
+      &:before,
+      &:after {
+        position: absolute;
+        z-index: -1;
+        top: 50%; left: 50%;
+        border-radius: 50%;
+        content: '';
+      }
+
+      &:before {
+        width: $bubble-d; height: $bubble-d;
+        margin: -$bubble-r;
+        border: solid $bubble-r currentColor;
+        transform: scale(0);
+      }
+
+      &:after {
+        width: $particle-d;
+        height: $particle-d;
+        margin: -$particle-r;
+      }
+    }
+
+    &--yes .helpful__button-helper {
+      &:before {
+        color: $color-primary;
+      }
+
+      &:after {
+        @include particles(1, 100%);
+      }
+    }
+
+    &--no .helpful__button-helper {
+      &:before {
+        color: #535353;
+      }
+
+      &:after {
+        @include particles(1, 0%);
+      }
+    }
+
+    .helpful__state:checked ~ & {
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      height: 0;
+      transition:
+        opacity ($animation-duration * .5) ($animation-duration * 1.5),
+        visibility 0s (2 * $animation-duration),
+        height 0s (2 * $animation-duration);
+    }
+
+    #helpful_type_5:checked ~ &--5,
+    #helpful_type_4:checked ~ &--4,
+    #helpful_type_3:checked ~ &--3,
+    #helpful_type_2:checked ~ &--2,
+    #helpful_type_1:checked ~ &--1 {
+
+      &:before {
+        transform: scale(1.13235);
+        animation: helpful-circle $animation-duration ease-out;
+      }
+
+      .helpful__button-helper {
+        &:before {
+          will-change: transform, border-width, border-color;
+          animation: helpful-bubble $animation-duration ease-out;
+        }
+
+        &:after {
+          will-change: opacity, box-shadow;
+        }
+      }
+    }
+
+    #helpful_type_3:checked ~ &--3,
+    #helpful_type_4:checked ~ &--4,
+    #helpful_type_5:checked ~ &--5 {
+
+      &:after {
+        animation: helpful-thumb-yes $animation-duration cubic-bezier(.17, .89, .32, 1.49);
+      }
+
+      .helpful__button-helper {
+        &:before {
+          color: #d8f378;
+        }
+
+        &:after {
+          animation: helpful-particles $animation-duration ease-out;
+        }
+      }
+    }
+
+    #helpful_type_1:checked ~ &--1,
+    #helpful_type_2:checked ~ &--2 {
+
+      &:after {
+        animation: helpful-thumb-no $animation-duration cubic-bezier(.17, .89, .32, 1.49);
+      }
+
+      .helpful__button-helper {
+        &:before {
+          color: #ccc;
+        }
+
+        &:after {
+          animation: helpful-particles-grayscale $animation-duration ease-out;
+        }
+      }
+    }
+  }
+}

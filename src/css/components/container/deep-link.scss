@@ -1,0 +1,87 @@
+@if ($NODE_ENV == 'development') {
+  .deep-link {
+    position: fixed;
+    top: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    height: 36px;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, .25);
+    overflow: hidden;
+    font-size: 1.4rem;
+    background: #fff;
+
+    & + & {
+      top: 38px;
+    }
+
+    &__input {
+      flex: 1 1 auto;
+      border: 0;
+      outline: 0 !important;
+      width: 0;
+      min-width: 0;
+      max-width: 0;
+      padding: 0;
+      white-space: nowrap;
+
+      &--textarea {
+        overflow-y: hidden;
+        height: calc(100% + 17px);
+      }
+    }
+
+    &:focus-within {
+      width: 100%;
+    }
+
+    &:focus-within &__input {
+      width: none;
+      max-width: none;
+      padding: 10px;
+    }
+
+    &__button {
+      flex: 0 0 auto;
+      position: relative;
+      z-index: 1;
+      padding: 10px;
+      border: 0;
+      font-weight: bold;
+      line-height: 1;
+      cursor: pointer;
+      color: #fff;
+      background: $color-alert;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0; bottom: 0; right: 100%;
+        width: 40px;
+        background: linear-gradient(to right, rgba(#fff, 0) 0%, rgba(#fff, 1) 80%);
+        pointer-events: none;
+      }
+
+      &:after {
+        content: 'Skopiowano';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        padding: 10px;
+        background: lighten($color-alert, 5);
+        text-align: center;
+        opacity: 0;
+        transition: opacity .5s .5s;
+      }
+
+      &:active {
+        &:after {
+          opacity: 1;
+          transition: opacity 0s;
+        }
+      }
+    }
+
+    &__input:focus + &__button {
+      &:before { opacity: 0; }
+    }
+  }
+}

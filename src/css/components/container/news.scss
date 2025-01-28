@@ -1,0 +1,22 @@
+.article {
+  &--news {
+      .article__meta-group {
+          &-text {
+              font-size: $font-size-xxs;
+          }
+      }
+
+      .article__title {
+          font-size: $font-size-md;
+          text-align: center;
+          margin-top: $spacing-xxs;
+      }
+
+      // News-specific section adjustments
+      .article__section {
+          &:first-of-type {
+              margin-top: 0;
+          }
+      }
+  }
+}

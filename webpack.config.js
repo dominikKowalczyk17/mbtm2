@@ -27,9 +27,9 @@ module.exports = env => {
 
   const { name: PORTAL, version: VERSION } = PACKAGE;
   if (!PORTAL) {
-    console.log('\x1b[41m%s\x1b[0m',
-      '\nNie została zdefiniowana nazwa projektu, przez co nie można określić folderu do którego projekt ma być budowany!' +
-      '\nUzupełnij package.json > parametr `name`\n'
+    console.log('\x1b[41m%s\x1b[0m', 
+      "\nNie została zdefiniowana nazwa projektu, przez co nie można określić folderu do którego projekt ma być budowany!" +
+      "\nUzupełnij package.json > parametr `name`\n"
     );
     return;
   }
@@ -108,10 +108,10 @@ module.exports = env => {
     }
   }
 
-  const entries = {
+  let entries = {
     'js/app': ['core-js/fn/promise', './js/index.js'],
   };
-  const cacheGroups = {};
+  let cacheGroups = {};
 
   [
     {
@@ -122,7 +122,7 @@ module.exports = env => {
     entries[entryPoint.name] = entryPoint.path;
     cacheGroups[entryPoint.name] = {
       name: entryPoint.name,
-      test: (m, c, entry = entryPoint.name) => m.constructor.name === 'CssModule' && recursiveIssuer(m) === entry,
+      test: (m,c,entry = entryPoint.name) => m.constructor.name === 'CssModule' && recursiveIssuer(m) === entry,
       chunks: 'all',
       enforce: true
     };
@@ -176,8 +176,8 @@ module.exports = env => {
               loader: 'postcss-loader',
               options: {
                 sourceMap: !isProd,
-                config: {
-                  ctx: { mode: NODE_ENV }
+                config: { 
+                  ctx: { mode: NODE_ENV } 
                 }
               },
             },
@@ -222,7 +222,6 @@ module.exports = env => {
       'index',
       'feed.ajax',
       'news',
-      'news-video',
       'video',
       'quiz',
       'poll',
@@ -233,17 +232,21 @@ module.exports = env => {
       'konkurs',
       'ankieta',
       'regulamin',
-      'juror',
-      'participant',
       'status-bar',
-      'social-component'
+      'participant',
+      'news-video',
+      'juror',
+      'header',
+      'social-component',
+      'zarzadzanie',
+      'article'
     ].map(
       item =>
         new HtmlWebpackPlugin({
           template: `${item}.html`,
           filename: `${item}.html`,
           inject: item.indexOf('ajax') === -1,
-          templateParameters: function (compilation, assets, options) {
+          templateParameters: function(compilation, assets, options) {
             return {
               publicPath: assets.publicPath,
             };
@@ -325,13 +328,13 @@ module.exports = env => {
         devServer: {
           publicPath: '/',
           hot: true,
-          setup: function (app) {
-            const multer = require('multer');
+          setup: function(app) {
+            const multer  = require('multer');
             const upload = multer();
             const bodyParser = require('body-parser');
 
             app.use(bodyParser.urlencoded({ extended: true }));
-            app.all('/icm/', upload.any(), function (req, res) {
+            app.all('/icm/', upload.any(), function(req, res) {
               eval(fs.readFileSync('src/js/ICM.js').toString());
             });
           }

@@ -1,10 +1,11 @@
 // globals
 // @import './nav';
 @import './button';
+//@import './player';
+@import 'share-dialog';
+@import 'social-component';
 @import 'video';
-@import "social-component";
-@import "share-dialog";
-@import "picture";
+@import 'picture';
 
 // header
 @import './header/index';
@@ -14,3 +15,6 @@
 
 // footer
 // @import './footer/index';
+
+// zarzadzanie
+@import 'zarzadzanie';

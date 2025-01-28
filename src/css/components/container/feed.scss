@@ -1,0 +1,1202 @@
+.feed {
+  position: relative;
+  float: left;
+  width: 100%;
+  margin-bottom: 30px;
+  word-wrap: break-word;
+
+  @include mq($mobile) {
+    &:not(:first-child) {
+      border-top: 8px solid #eee;
+    }
+  }
+
+  @include mq($tablet) {
+    width: 50%;
+    padding-left: $news-gap;
+  }
+
+  &__link {
+    display: block;
+
+    @include mq($tablet) {
+      overflow: hidden;
+      border-radius: 6px;
+    }
+  }
+
+  &__figure {
+    position: relative;
+    margin: 0; padding: 0;
+    background: $color-bg;
+    overflow: hidden;
+
+    @include aspect(1242, 608);
+
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      display: block;
+      height: 80px;
+
+      @include mq($mobile) {
+        height: 60px;
+      }
+    }
+  }
+
+  &__img {
+    @include fill;
+    @include object-fit(cover);
+  }
+
+  &__header {
+    position: relative;
+    padding: 42px 42px 22px;
+    text-align: center;
+    letter-spacing: -.01em;
+    color: $color-dark;
+    background: #fff;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      width: 66px; height: 66px;
+      margin: -33px;
+      border-radius: 100%;
+
+      @include mq($mobile) {
+        width: 52px; height: 52px;
+        margin: -26px;
+      }
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      width: 28px; height: 28px;
+      margin: -14px;
+      background: none no-repeat center / contain;
+
+      @include mq($mobile) {
+        width: 22px; height: 22px;
+        margin: -11px;
+      }
+    }
+
+    @include mq($mobile) {
+      margin: -20px 18px 0;
+      padding: 36px 36px 16px;
+      border-radius: 5px;
+    }
+  }
+
+  &__title {
+    clear: both;
+    margin: 0;
+    font-family: $font-sub;
+    font-size: 3rem;
+    font-size: 2.93vw;
+    font-weight: 100;
+    line-height: 1.13;
+
+    @include mq($mobile) {
+      font-size: 2.4rem;
+      font-size: 6.4vw;
+    }
+  }
+
+  &__time {
+    position: absolute;
+    top: 10px; right: 18px;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: #a8a8a8;
+
+    @include mq($mobile) {
+      font-size: 1.2rem;
+    }
+  }
+
+  &__text {
+    color: #fff;
+    font-size: 2rem;
+    line-height: 3.2rem;
+
+    &--1 {
+      display: block;
+    }
+
+    &--2 {
+      display: none;
+    }
+  }
+
+  &__quiz-link {
+    color: #fff;
+    font-size: 2rem;
+    text-decoration: underline;
+    font-weight: 600;
+    display: block;
+  }
+
+  // --target
+  &--target {
+    overflow: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    @include aspect(1242, 608);
+
+    .feed {
+      &__figure {
+        position: fixed;
+        top: 0; left: 0;
+        z-index: -1;
+        width: 100%;
+
+        &:after { display: none; }
+      }
+
+      &__video-wrap {
+        position: relative;
+        background-color: #000;
+        margin: 0;
+        pointer-events: none;
+
+        &:before {
+          content: '';
+          display: block;
+          position: relative;
+          top: 0; left: 0;
+          right: 0; bottom: 0;
+          width: auto; height: auto;
+          border-radius: 0;
+          background: #000;
+          opacity: .6;
+          z-index: 1;
+          pointer-events: none;
+          padding-top: 56.25%;
+
+          @include mq('(max-width: 640px)') {
+            position: absolute;
+            padding: 0;
+          }
+        }
+
+        &:after {
+          content: '';
+          display: block;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 64px; height: 77px;
+          margin: -48px -26px;
+          background: url(../gfx/ico-play.png) no-repeat;
+          background-size: contain;
+          z-index: 2;
+          pointer-events: none;
+
+          @include mq('(max-width: 1023px)') {
+            width: 52px; height: 62px;
+            margin: -41px -21px;
+          }
+        }
+
+        .video-preplay {
+          pointer-events: all;
+          display: block;
+          position: absolute;
+          top: 0;
+
+          @include mq('(max-width: 640px)') {
+            position: static;
+          }
+        }
+
+        &.feed__video-wrap--fullscreen {
+          @include fill;
+
+          &:before {
+            position: absolute;
+            padding: 0;
+          }
+
+          .video-preplay {
+            @include fill;
+            @include object-fit(contain);
+
+            pointer-events: all;
+            display: block;
+          }
+        }
+
+        @include mq('(max-width: 640px)') {
+          width: calc(100% + 40px) !important;
+          max-width: none;
+          display: block;
+          margin-left: -20px;
+        }
+      }
+
+      &__header-wrap {
+        @include clearfix(after);
+
+        clear: both;
+        position: relative;
+
+        &:before {
+          content: '';
+          position: absolute;
+          left: 0; bottom: 100%;
+          width: 100%;
+          height: 30px;
+        }
+      }
+
+      &__header {
+        clear: both;
+        margin: 0 get-perc(90, 1024);
+        padding: 36px 36px 16px;
+        border-radius: 5px;
+
+        @include mq($mobile) {
+          top: -20px;
+          margin: 0 20px -20px;
+        }
+      }
+
+      &__info {
+        clear: both;
+        margin: 0 get-perc(90, 1024);
+        padding: 20px 25px 16px;
+
+        @include clearfix;
+
+        @include mq($mobile) {
+          margin: 0 20px;
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+      }
+
+      &__time,
+      &__view-count {
+        display: inline-block;
+        vertical-align: middle;
+        position: static;
+        font-size: 1.5rem;
+        line-height: 1;
+        color: #a8a8a8;
+      }
+
+      &__info .feed__time,
+      &__info .feed__view-count {
+        color: #fff;
+
+        &:not(:first-child) {
+          border-left: 1px solid #fff;
+          margin-left: 10px;
+          padding-left: 10px;
+        }
+      }
+
+      &__share {
+        float: right;
+        width: 32px; height: 32px;
+        text-indent: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+        background: 0 0;
+        border: 0;
+        padding: 0;
+        margin: 0;
+
+        &:after {
+          @include fill;
+
+          content: '';
+          background: url(../gfx/ico-share.png) no-repeat center / contain;
+        }
+
+        @include mq($mobile) {
+          width: 26px;
+          height: 26px;
+          margin-left: -26px;
+        }
+      }
+
+      &__content {
+        @include clearfix('before');
+
+        padding: get-perc(50, 1024) get-perc(90, 1024);
+        background: #fff;
+
+        @include mq($mobile) {
+          padding: 20px;
+          text-align: center;
+        }
+      }
+
+      &__preview {
+        clear: both;
+        font-size: 2.4rem;
+        font-weight: bold;
+        line-height: 1.33;
+
+        @include mq($mobile) {
+          font-size: 1.8rem;
+        }
+      }
+
+      &__description {
+        font-size: 1.7rem;
+        line-height: 1.75;
+
+        @include mq($mobile) {
+          font-size: 1.45rem;
+        }
+
+        p { margin: 1.8em 0; }
+
+        a { font-weight: bold; color: #e72376; }
+
+        > {
+          h1, h2, h3, h4, h5, h6 {
+            margin: 0;
+            line-height: 1;
+          }
+
+          h1, h2 {
+            font-size: 2.5rem;
+          }
+
+          h3, h4 {
+            font-size: 2.3rem;
+          }
+
+          h5, h6 {
+            font-size: 2.1rem;
+          }
+
+          ul {
+            padding: 0;
+            list-style: none !important;
+            text-align: left;
+
+            li {
+              position: relative;
+              padding: 5px 0 5px 40px;
+
+              &:before {
+                content: '';
+                position: absolute;
+                top: 14px; left: 0;
+                width: 13px; height: 13px;
+                background: #f77c3b;
+                border-radius: 13px;
+              }
+
+              @include mq($mobile) {
+                padding-left: 25px;
+
+                &:before {
+                  width: 11px; height: 11px;
+                }
+              }
+            }
+          }
+        }
+
+        .twitter-tweet {
+          margin: 0 auto;
+        }
+
+        blockquote:not([class]) {
+          position: relative;
+          z-index: 1;
+          margin: 0;
+          padding: 40px 0;
+          font-size: 2.4rem;
+          font-weight: 100;
+          font-style: italic;
+          text-align: center;
+          line-height: 1.33;
+
+          &:before {
+            content: '';
+            position: absolute;
+            top: 0; left: get-perc(50, 1024);
+            z-index: -1;
+            width: 23px; height: 55%;
+            max-height: 130px;
+            border-radius: 6px;
+            background: linear-gradient(to bottom, #ffbb95 0%, #ffdb9b 100%);
+          }
+
+          p { margin: 0; }
+
+          @include mq($mobile) {
+            padding: 20px 0;
+            font-size: 1.8rem;
+
+            &:before {
+              left: 20px;
+              width: 20px; max-height: 105px;
+            }
+          }
+        }
+
+        p iframe {
+          max-width: 100%;
+        }
+
+        p > img,
+        p > span > img,
+        p > a > img,
+        .article-image img,
+        > figure img,
+        .videoPlayer {
+          max-width: 100%;
+          width: 100% !important;
+          height: auto !important;
+          margin: 0;
+
+          @include mq($mobile) {
+            display: block;
+            width: calc(100% + 40px) !important;
+            margin-left: -20px;
+            max-width: none;
+          }
+        }
+
+        figure:not([class]) {
+          position: relative;
+          display: inline-block;
+          margin: 0;
+          overflow: hidden;
+
+          img {
+            float: left;
+          }
+        }
+
+        .article-image {
+          display: inline-block;
+          position: relative;
+          max-width: 100%;
+          margin: 0;
+          overflow: hidden;
+
+          @include mq($mobile) {
+            width: calc(100% + 40px);
+            margin-left: -20px;
+            max-width: none;
+            margin-bottom: -.5em;
+          }
+
+          img {
+            float: left;
+            width: 100% !important;
+            height: auto;
+            margin: 0;
+          }
+
+          &-wrap {
+            position: relative;
+            float: left;
+
+            @include clearfix;
+          }
+
+          &-src {
+            @include figcaption;
+          }
+
+          &-capition {
+            clear: both;
+            position: relative;
+            padding: 10px 20px 0 0;
+            font-size: 1.4rem;
+          }
+        }
+
+        .videoPlayer {
+          &.is--persistent {
+            margin: 0 !important;
+          }
+        }
+      }
+
+      &__helpful {
+        position: relative;
+        padding: 60px 0 30px;
+
+        &:before {
+          content: '';
+          position: absolute;
+          top: 30px; left: 0; right: 0;
+          width: 130px;
+          height: 1px;
+          margin: 0 auto;
+          border-radius: 1px;
+          background-image: linear-gradient(90deg, #ffbb95 0%, #ffdb9b 100%);
+        }
+      }
+    }
+  }
+
+  &--news {
+    .feed {
+      @include mq($tablet) {
+        &__link { box-shadow: 0 21px 27px rgba(#f8732b, .3); }
+      }
+      &__figure:after { background: linear-gradient(to bottom, rgba(#ff8c4c, 0) 0%, #ff8c4c 100%); }
+      &__header {
+        &:before {
+          background: #ff8c4c;
+          background: linear-gradient(to bottom, #ffc76f 0%, #f56830 100%);
+          box-shadow: inset 0 3px 5px rgba($color-light, .3), 0 4px 10px rgba(#f89f2b, .56);
+
+          @include mq($mobile) {
+            box-shadow: inset 0 1px 3px rgba($color-light, .3), 0 4px 8px rgba(#f89f2b, .56);
+          }
+        }
+        &:after { background-image: url(../gfx/ico-news.png); }
+
+        @include mq($mobile) {
+          box-shadow: 0 6px 8px rgba(#f8732b, .3);
+        }
+      }
+    }
+
+    &.feed--target {
+      .feed {
+        &__header-wrap {
+          background: linear-gradient(to bottom, #f87831 0%, #fca750 100%);
+
+          &:before {
+            background: linear-gradient(to bottom, rgba(#f87831, 0) 0%, #f87831 100%);
+          }
+        }
+
+        &__header {
+          top: -46px;
+          margin-bottom: -46px;
+          box-shadow: 0 8px 10px #f8732b;
+        }
+      }
+    }
+  }
+
+  &--video {
+    .feed {
+      @include mq($tablet) {
+        &__link { box-shadow: 0 21px 27px rgba(#429af4, .3); }
+      }
+      &__figure:after { background: linear-gradient(to bottom, rgba(#4bb9f6, 0) 0%, #4bb9f6 100%); }
+      &__header {
+        &:before {
+          background: #4bb9f6;
+          background: linear-gradient(to bottom, #6ffff7 0%, #3088f5 100%);
+          box-shadow: inset 0 3px 5px rgba($color-light, .3), 0 4px 10px rgba(#4b90f6, .56);
+
+          @include mq($mobile) {
+            box-shadow: inset 0 1px 3px rgba($color-light, .3), 0 4px 8px rgba(#4b90f6, .56);
+          }
+        }
+        &:after { background-image: url(../gfx/ico-video.png); }
+
+        @include mq($mobile) {
+          box-shadow: 0 6px 8px rgba(#429af4, .3);
+        }
+      }
+    }
+
+    &.feed--target {
+      display: flex;
+      flex-flow: column;
+      z-index: 1;
+      min-height: 100%;
+      background: #4e93e2;
+
+      &:before { display: none; }
+
+      .feed {
+        &__figure {
+          @include fill;
+        }
+
+        &__video {
+          @include fill;
+
+          bottom: 0;
+          background: #000;
+
+          .videoPlayer__video {
+            height: 100%;
+            padding: 0;
+          }
+        }
+
+        &__header {
+          position: absolute;
+          top: auto; bottom: 40px;
+          left: 0; right: 0;
+          z-index: 1;
+          margin: 0;
+          padding: 25px;
+          color: #fff;
+          text-align: left;
+          background: linear-gradient(to bottom, rgba(#000, 0) 0%, #000 100%);
+          pointer-events: none;
+          opacity: 0;
+          transition: opacity .5s 1.5s;
+
+          &:before {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            right: 0; bottom: 0;
+            z-index: -1;
+            width: auto; height: auto;
+            border-radius: 0;
+            background: #000;
+            opacity: .6;
+          }
+
+          &:after {
+            display: none;
+            position: fixed;
+            top: 50%;
+            width: 64px; height: 77px;
+            margin: -48px -26px;
+            background-image: url(../gfx/ico-play.png);
+
+            @include mq('(max-width: 1023px)') {
+              width: 52px; height: 62px;
+              margin: -41px -21px;
+            }
+          }
+        }
+
+        &__title {
+          font-family: $font-sub;
+          font-size: 2.4rem;
+          font-weight: 100;
+
+          @include mq($tablet) {
+            font-size: 3rem;
+          }
+        }
+      }
+
+      video.feed__video {
+        height: 100% !important;
+      }
+
+      .videoPlayer.stopped ~ .feed__header {
+        opacity: 1;
+        transition: opacity .5s;
+
+        &:before,
+        &:after {
+          display: block;
+        }
+      }
+    }
+  }
+
+  &--quiz {
+    .feed {
+      @include mq($tablet) {
+        &__link { box-shadow: 0 21px 27px rgba(#f0307f, .3); }
+      }
+      &__figure:after { background: linear-gradient(to bottom, rgba(#f44692, 0) 0%, #f44692 100%); }
+      &__header {
+        &:before {
+          background: #f44692;
+          background: linear-gradient(to bottom, #ff8683 0%, #e72376 100%);
+          box-shadow: inset 0 3px 5px rgba($color-light, .3), 0 4px 10px rgba(#f02c7f, .56);
+
+          @include mq($mobile) {
+            box-shadow: inset 0 1px 3px rgba($color-light, .3), 0 4px 8px rgba(#f02c7f, .56);
+          }
+        }
+        &:after { background-image: url(../gfx/ico-quiz.png); }
+
+        @include mq($mobile) {
+          box-shadow: 0 6px 8px rgba(#f0307f, .3);
+        }
+      }
+    }
+
+    &.feed--target {
+      display: flex;
+      flex-flow: column;
+      z-index: 1;
+      min-height: 100%;
+      background: #4e93e2;
+
+      &:before {
+        @include mq($tablet) {
+          margin-bottom: -23.325%;
+        }
+      }
+
+      .feed {
+        &__figure {
+          max-height: 810px;
+        }
+
+        &__header-wrap {
+          @include mq($mobile) {
+            background: #4e93e2;
+          }
+
+          &:before {
+            height: 70px;
+            background: linear-gradient(to bottom, rgba(#4e93e2, 0) 0%, #4e93e2 100%);
+
+            @include mq($tablet) {
+              bottom: 0;
+              height: 175%;
+            }
+          }
+        }
+
+        &__header {
+          box-shadow: 0 8px 10px #4d70c1;
+
+          @include mq($tablet) {
+            max-width: 420px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 45px;
+            padding-bottom: 28px;
+          }
+
+          &--counter {
+            &:after {
+              content: attr(data-counter);
+              left: 0;
+              width: 100%;
+              margin-left: 0;
+              font-size: 2.25rem;
+              font-weight: bold;
+              color: #fff;
+              background: 0 0;
+              white-space: nowrap;
+
+              @include mq($mobile) {
+                font-size: 1.8rem;
+              }
+            }
+          }
+        }
+
+        &__title {
+          margin-bottom: 10px;
+
+          @include mq($tablet) {
+            font-size: 3rem;
+          }
+        }
+
+        &__view-count {
+          @include mq($tablet) {
+            font-size: 1.7rem;
+          }
+        }
+
+        &__content {
+          flex: 1 1 auto;
+          background: #4e93e2;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          text-align: center;
+
+          @include mq($tablet) {
+            padding: 64px 38px;
+          }
+        }
+      }
+    }
+  }
+
+  &--poll {
+    .feed {
+      @include mq($tablet) {
+        &__link { box-shadow: 0 21px 27px rgba(#f0307f, .3); }
+      }
+      &__figure:after { background: linear-gradient(to bottom, rgba(#f44692, 0) 0%, #f44692 100%); }
+      &__header {
+        &:before {
+          background: #f44692;
+          background: linear-gradient(to bottom, #ff8683 0%, #e72376 100%);
+          box-shadow: inset 0 3px 5px rgba($color-light, .3), 0 4px 10px rgba(#f02c7f, .56);
+
+          @include mq($mobile) {
+            box-shadow: inset 0 1px 3px rgba($color-light, .3), 0 4px 8px rgba(#f02c7f, .56);
+          }
+        }
+        &:after { background-image: url(../gfx/ico-poll.png); }
+
+        @include mq($mobile) {
+          box-shadow: 0 6px 8px rgba(#f0307f, .3);
+        }
+      }
+    }
+
+    &.feed--target {
+      display: flex;
+      flex-flow: column;
+      z-index: 1;
+      min-height: 100%;
+      background: #f07faf;
+
+      &:before {
+        @include mq($tablet) {
+          margin-bottom: -28.325%;
+        }
+      }
+
+      .feed {
+        &__header-wrap {
+          @include mq($mobile) {
+            background: #f07faf;
+          }
+
+          &:before {
+            height: 70px;
+            background: linear-gradient(to bottom, rgba(#f07faf, 0) 0%, #f07faf 100%);
+
+            @include mq($tablet) {
+              bottom: 0;
+              height: 125%;
+            }
+          }
+        }
+
+        &__header {
+          box-shadow: 0 8px 10px rgba(#f0307f, .5);
+
+          @include mq($tablet) {
+            max-width: 420px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 45px;
+            padding-bottom: 28px;
+          }
+        }
+
+        &__title {
+          margin-bottom: 10px;
+
+          @include mq($tablet) {
+            font-size: 3rem;
+          }
+        }
+
+        &__view-count {
+          @include mq($tablet) {
+            font-size: 1.7rem;
+          }
+        }
+
+        &__content {
+          flex: 1 1 auto;
+          background: #f07faf;
+          padding-top: 20px;
+          padding-bottom: 20px;
+
+          @include mq($tablet) {
+            padding: 30px 82px;
+          }
+        }
+      }
+    }
+  }
+
+  &--vote {
+    .feed {
+      @include mq($tablet) {
+        &__link { box-shadow: 0 21px 27px rgba(#cb6bfd, .3); }
+      }
+      &__figure:after { background: linear-gradient(to bottom, rgba(#d77dfe, 0) 0%, #d77dfe 100%); }
+      &__header {
+        &:before {
+          background: #d074ff;
+          background: linear-gradient(to bottom, #d074ff 0%, #a720ed 100%);
+          box-shadow: inset 0 3px 5px rgba($color-light, .3), 0 4px 10px rgba(#be42f8, .56);
+
+          @include mq($mobile) {
+            box-shadow: inset 0 1px 3px rgba($color-light, .3), 0 4px 8px rgba(#be42f8, .56);
+          }
+        }
+        &:after { background-image: url(../gfx/ico-vote.png); }
+
+        @include mq($mobile) {
+          box-shadow: 0 6px 8px rgba(#cb6bfd, .3);
+        }
+      }
+    }
+
+    &.feed--target {
+      .feed {
+        &__header-wrap {
+          background: linear-gradient(to bottom, #d34fff 0%, #cb6bfd 100%);
+
+          &:before {
+            background: linear-gradient(to bottom, rgba(#d34fff, 0) 0%, #d34fff 100%);
+          }
+        }
+
+        &__header {
+          top: -46px;
+          margin-bottom: -46px;
+          box-shadow: 0 8px 10px #b231f7;
+        }
+      }
+    }
+  }
+
+  &--contest {
+    .feed {
+      @include mq($tablet) {
+        &__link { box-shadow: 0 21px 27px rgba(#ff5d19, .3); }
+      }
+      &__figure:after { background: linear-gradient(to bottom, rgba(#ff5d19, 0) 0%, #ff5d19 100%); }
+      &__header {
+        &:before {
+          background: #ff8c4c;
+          background: linear-gradient(to bottom, #ffac8b 0%, #ff6317 100%);
+          box-shadow: inset 0 3px 5px rgba($color-light, .3), 0 4px 10px rgba(#ff1824, .56);
+
+          @include mq($mobile) {
+            box-shadow: inset 0 1px 3px rgba($color-light, .3), 0 4px 8px rgba(#ff1824, .56);
+          }
+        }
+
+        &:after {
+          background: url(../gfx/ico-vote.png) center/contain no-repeat;
+        }
+
+        @include mq($mobile) {
+          box-shadow: 0 6px 8px rgba(#ff854d, .3);
+        }
+
+        .feed__view-count {
+          margin: 10px 0 0;
+          font-family: $font-main;
+          font-size: 1.125rem;
+          color: #696969;
+        }
+      }
+    }
+
+    &.feed--target {
+      .feed {
+        &__header-wrap {
+          background: linear-gradient(to bottom, #ff793c 0%, #ff9f74 100%);
+
+          &:before {
+            background: linear-gradient(to bottom, rgba(#ff793c, 0) 0%, #ff793c 100%);
+          }
+        }
+
+        &__header {
+          top: -20px;
+          margin-bottom: -20px;
+          box-shadow: 0 8px 10px #ff854d;
+        }
+
+        &__content {
+          padding-bottom: 130px;
+        }
+      }
+    }
+  }
+
+  &--question {
+    .feed {
+      @include mq($tablet) {
+        &__link { box-shadow: 0 21px 27px rgba(#6ed29d, .3); }
+      }
+      &__figure:after { background: linear-gradient(to bottom, rgba(#6ed29d, 0) 0%, #6ed29d 100%); }
+      &__header {
+        &:before {
+          background: #1ed36a;
+          background: linear-gradient(to bottom, #33f176 0%, #09b65f 100%);
+          box-shadow: inset 0 3px 5px rgba($color-light, .3), 0 4px 10px rgba(#18ff74, .56);
+
+          @include mq($mobile) {
+            box-shadow: inset 0 1px 3px rgba($color-light, .3), 0 4px 8px rgba(#18ff74, .56);
+          }
+        }
+
+        &:after {
+          width: 28px; height: 28px;
+          margin: -14px;
+          background: url(../gfx/ico-question.png) center/contain no-repeat;
+        }
+
+        @include mq($mobile) {
+          box-shadow: 0 6px 8px rgba(#5dae68, .3);
+        }
+
+        .feed__view-count {
+          margin: 10px 0 0;
+          font-family: $font-main;
+          font-size: 1.125rem;
+          color: #696969;
+        }
+      }
+    }
+
+    &.feed--target {
+      .feed {
+        &__header-wrap {
+          background: linear-gradient(to bottom, #27e06f 0%, #64c885 100%);
+
+          &:before {
+            background: linear-gradient(to bottom, rgba(#27e06f, 0) 0%, #27e06f 100%);
+          }
+        }
+
+        &__header {
+          top: -20px;
+          margin-bottom: -20px;
+          box-shadow: 0 8px 10px #5dae68;
+        }
+
+        &__content {
+          padding-bottom: 130px;
+        }
+      }
+    }
+  }
+
+  &--sponsor {
+    &:not(.feed--target) {
+      margin-top: 20px;
+      margin-bottom: 0;
+      padding-left: 20px;
+
+      @include mq($mobile) {
+        width: 78.125%;
+        margin: 40px auto 0 auto;
+        padding-left: 0;
+        margin-top: 40px;
+      }
+
+      &:not(:first-child) {
+        border-top: none;
+      }
+
+      .feed {
+        &__figure {
+          max-width: 50.1%;
+          object-fit: contain;
+          margin: 0 auto 4% auto;
+          background-color: #fff;
+
+          &:before {
+            padding-top: 64.46629213483146%;
+          }
+
+          @include mq($mobile) {
+            max-width: 74%;
+            margin: 0 18% 10% 18%;
+          }
+        }
+
+        &__img {
+          object-fit: contain;
+          font-family: "object-fit: contain;", sans-serif;
+        }
+
+        &__header {
+          padding: 0 16px 20px 16px;
+
+          @include mq($mobile) {
+            padding: 37px 16px 27px 16px;
+          }
+
+          @include mq('(max-width: 420px)') {
+            padding: 30px 16px 20px 16px;
+          }
+        }
+
+        &__title {
+          font-size: 22px;
+          font-weight: bold;
+
+          @include mq($mobile) {
+            font-size: 24px;
+          }
+
+          @include mq('(max-width: 420px)') {
+            font-size: 16px;
+          }
+        }
+
+        &__link {
+          padding-top: 5%;
+          box-shadow: 0 5px 14px rgba(#d9d9d9, .56);
+          border-radius: 10px;
+
+          @include mq($mobile) {
+            padding-top: 10%;
+            box-shadow: 0 3px 8px rgba(#d9d9d9, .56);
+          }
+        }
+      }
+    }
+
+    .feed {
+      &__content { padding: 0; }
+
+      &__description {
+        font-size: 0;
+
+        img { width: 100%; }
+      }
+    }
+
+    &.feed--target {
+      &:before {
+        @media (orientation: landscape) {
+          padding-top: 38%;
+        }
+      }
+    }
+  }
+
+  &-grid {
+    display: flex;
+    flex-flow: row wrap;
+    clear: both;
+
+    &__button {
+      width: 100%;
+      text-align: center;
+
+      @include mq($tablet) {
+        padding-left: $news-gap;
+      }
+    }
+  }
+
+  &-grid-outer {
+    @include mq($tablet) {
+      margin-left: -$news-gap;
+      padding: 40px 30px;
+    }
+  }
+}
