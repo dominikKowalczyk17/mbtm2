@@ -1,15 +1,5 @@
-.article {
-  &--juror {
-      .article__title {
-          display: inline-block;
-          margin-bottom: $spacing-xxxxxs;
-          
-          h1 {
-              font-weight: $font-weight-light;
-              font-size: $font-size-lg;
-              max-width: 25rem;
-              text-align: center;
-          }
-      }
+.article--juror {
+  .article__media {
+    margin: $spacing-large 0 0;
   }
 }

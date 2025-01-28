@@ -2,63 +2,50 @@
 <html lang="pl">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Must Be The Music - Juror</title>
 </head>
 
 <body>
-    <%= require('html-loader!./status-bar.html') %>
-        <%= require('html-loader!./header.html') %>
-            <section class="article article--juror">
-                <main class="main">
-                    <article class="article__content">
-                        <!-- Hero section modified for juror -->
-                        <header class="article__hero">
-                            <div class="article__title">
-                                <p>
-                                    Dawid Kwiatkowski
-                                </p>
-                            </div>
-                            <img class="article__hero-image article__hero-image--juror" src="./gfx/dawid-kwiatkowski.jpg" alt="Dawid Kwiatkowski" />
-                            </header>
+<%= require('html-loader!./status-bar.html') %>
+<%= require('html-loader!./header.html') %>
+<section class="article article--juror">
 
-                        <!-- Content sections with juror-specific modifications -->
-                        <div class="article__sections">
-                            <section class="article__section article__section--juror">
-                                <!-- Section title modified for juror -->
-                                <div class="article__section-title article__section-title--juror">
-                                    <p>Kim jest?</p>
-                                </div>
-                        
-                                <!-- Text content -->
-                                <div class="article__text">
-                                    Polski piosenkarz, autor tekstów i kompozytor. Karierę muzyczną zaczynał w zespole Two of Us.
-                                    Solową działalność rozpoczął albumem „9893". Do czasu startu programu miał ich na swoim koncie osiem.
-                                    Do jego największych przebojów można zaliczyć takie utwory jak „Jesteś", „Bez Ciebie", „Proste"
-                                    czy „Idziesz ze mną".<br>
-                                    Wiele z jego singli pokryło się złotą lub platynową płytą. Uczestniczył w programie „Dancing with
-                                    the Stars. Taniec z Gwiazdami", gdzie tańczył z Janją Lesar. Odpadł w odcinku półfinałowym.
-                                    Użyczał głosu w filmach i bajkach. Laureat takich nagród jak Nickelodeon Kids' Choice Awards,
-                                    MTV Europe Music Awards i Telekamery.
-                                    </div>
-                                <!-- Video section modified for juror -->
-                                <figure class="article__media video video--juror">
-                                    <button aria-label="Odtwórz wideo" class="video__play-btn" type="button">
-                                        <img alt="" class="video__thumbnail video-preplay" data-vod="7" height="193" src="./gfx/video-thumbnail.jpg">
-                                        <time class="video__duration" datetime="PT4M24S">04:24</time>
-                                        </button>
-                                        </figure>
-                                        </section>
-                        </div>
-                        
-                        <!-- Social component with juror modifier -->
-                        <div class="article__social article__social--juror">
-                            <%= require('html-loader!./social-component.html') %>
-                        </div>
-                        </article>
-                        </main>
-                        </section>
+    <main class="main">
+        <article class="article__content">
+            <header class="article__hero">
+                <div class="article__title">
+                    <p>Dawid Kwiatkowski</p>
+                </div>
+                <img alt="Dawid Kwiatkowski" class="article__hero-image" src="./gfx/dawid-kwiatkowski.jpg">
+
+            </header>
+
+            <div class="article__sections">
+                <section class="article__section">
+                    <div class="article__text">
+                        Polski piosenkarz, autor tekstów i kompozytor. Karierę muzyczną zaczynał w zespole Two of Us.
+                        Solową działalność rozpoczął albumem „9893”. Do czasu startu programu miał ich na swoim koncie
+                        osiem. Do jego największych przebojów można zaliczyć takie utwory jak „Jesteś”, „Bez Ciebie”,
+                        „Proste” czy „Idziesz ze mną”.
+                        Wiele z jego singli pokryło się złotą lub platynową płytą. Uczestniczył w programie „Dancing
+                        with the Stars. Taniec z Gwiazdami”, gdzie tańczył z Janją Lesar. Odpadł w odcinku półfinałowym.
+                        Użyczał głosu w filmach i bajkach. Laureat takich nagród jak Nickelodeon Kids’ Choice Awards,
+                        MTV Europe Music Awards i Telekamery.
+                    </div>
+                </section>
+                <figure class="article__media video">
+                    <button aria-label="Odtwórz wideo" class="video__play-btn" type="button">
+                        <img alt="" class="video__thumbnail video-preplay" data-vod="7" height="193"
+                             src="./gfx/video-thumbnail.jpg">
+                        <time class="video__duration" datetime="PT4M24S">04:24</time>
+                    </button>
+                </figure>
+            </div>
+        </article>
+    </main>
+</section>
 </body>
 
 </html>

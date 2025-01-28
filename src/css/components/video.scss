@@ -5,38 +5,39 @@
   aspect-ratio: 16/9;
 
   &__play-btn {
-      width: 100%;
-      padding: 0;
-      border: 0;
-      background: none;
-      cursor: pointer;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
 
-      &:after {
-          content: '';
-          background: url('/gfx/icons/play_icon.svg') no-repeat center center;
-          background-size: contain;
-          position: absolute;
-          width: 5rem;
-          height: 4rem;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-      }
+    &:after {
+      content: '';
+      background: url('/gfx/icons/play_icon.svg') no-repeat center center;
+      background-size: contain;
+      position: absolute;
+      width: 5rem;
+      height: 4rem;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 
   &__thumbnail {
-      width: 100%;
-      height: auto;
+    width: 100%;
+    height: auto;
   }
 
   &__duration {
-      position: absolute;
-      right: 1.1rem;
-      top: 0.8rem;
-      background: transparent;
-      color: $color-light;
-      font-weight: $font-weight-light;
-      font-size: 0.9rem;
-      line-height: normal;
+    position: absolute;
+    right: 1.1rem;
+    top: 0.8rem;
+    background: transparent;
+    color: $color-light;
+    font-weight: $font-weight-light;
+    font-size: 0.9rem;
+    line-height: normal;
   }
 }

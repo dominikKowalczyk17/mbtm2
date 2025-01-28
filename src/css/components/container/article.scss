@@ -8,104 +8,6 @@
   padding-bottom: $main_padding;
   position: relative;
 
-
-  &__header {
-    margin-top: $spacing-xs;
-    text-align: center;
-    position: relative;
-  }
-
-  &__name {
-    display: inline-block;
-    margin-bottom: $spacing-xxxxxs;
-    align-items: center;
-
-
-    p {
-      font-weight: $font-weight-light;
-      font-size: $font-size-lg;
-      max-width: 25rem;
-      text-align: center;
-    }
-  }
-
-  &__image {
-    width: 100%;
-    border-radius: $border-radius;
-    object-fit: cover;
-    margin: 0 auto;
-  }
-
-  &__bio {
-    flex: 1;
-    font-size: $font-size-normal;
-    line-height: $font-line-height-small;
-    margin-top: $section-spacing-xsmall;
-    padding: $spacing-xxs;
-
-
-    &-text {
-      p {
-        width: 25rem;
-        margin: auto;
-        font-size: $font-size-md;
-        font-weight: $font-weight-light;
-        text-align: center;
-        padding-bottom: $spacing-xxxxs;
-        line-height: $font-line-height-normal;
-        font-style: normal;
-      }
-    }
-
-    &__date {
-      display: flex;
-      width: 25rem;
-      justify-content: center;
-      align-items: center;
-      gap: $spacing-xxxxxs;
-      margin-inline: auto;
-      margin-bottom: $spacing-xxs;
-
-      &-text {
-        font-size: $font-size-xxs;
-        font-style: normal;
-        font-weight: $font-weight-normal;
-        line-height: $font-line-height-normal;
-      }
-
-      &-separator {
-        background-color: $color-light;
-        border-radius: 99rem;
-        width: .2rem;
-        height: .2rem;
-      }
-    }
-  }
-
-  &__text {
-    font-size: $font-size-txt;
-    font-weight: $font-weight-normal;
-    padding-inline: .75rem;
-    line-height: $font-line-height-normal;
-  }
-
-  &__video {
-    margin-top: $spacing-large;
-    border-radius: $border-radius;
-
-    figure {
-      margin: 0;
-    }
-
-    &--news {
-      margin-top: 0;
-    }
-  }
-
-  &__image {
-    border-radius: $border-radius;
-  }
-
   /**======================
   *         TEMPLATE      *
   =========================**/
@@ -119,14 +21,18 @@
     flex: 1;
     font-size: $font-size-normal;
     line-height: $font-line-height-small;
+  }
+
+  &__sections {
     margin-top: $section-spacing-xsmall;
     padding: $spacing-xxs;
   }
 
   &__section {
-    padding: $spacing-xxs;
-    
+
     &-title {
+      margin-bottom: $spacing-xxs;
+
       p {
         width: 25rem;
         margin: auto;
@@ -141,15 +47,20 @@
   }
 
   &__title {
-    display: inline-block;
+    display: flex;
+    width: 25rem;
+    justify-content: center;
     margin-bottom: $spacing-xxxxxs;
     align-items: center;
 
     p {
+      text-align: center;
+      font-style: normal;
+      line-height: normal;
       font-weight: $font-weight-light;
       font-size: $font-size-lg;
       max-width: 25rem;
-      text-align: center;
+      margin: auto;
     }
   }
 
@@ -178,11 +89,14 @@
   }
 
   &__media {
-    margin-top: $spacing-large;
+    margin: $spacing-large 0;
     border-radius: $border-radius;
   }
 
   &__hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: $spacing-xs;
     text-align: center;
     position: relative;
@@ -195,4 +109,10 @@
     }
   }
 
+  &__text {
+    font-size: $font-size-txt;
+    font-weight: $font-weight-normal;
+    padding-inline: .75rem;
+    line-height: $font-line-height-normal;
+  }
 }

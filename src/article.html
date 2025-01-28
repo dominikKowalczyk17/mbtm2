@@ -1,72 +1,76 @@
-<!-- This single template can be used for all three types -->
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Must Be The Music</title>
 </head>
 
 <body>
-    <%= require('html-loader!./status-bar.html') %>
-        <%= require('html-loader!./header.html') %>
-    <section class="article">
-        <main class="main">
-            <article class="article__content">
-                <!-- Hero section that works for all types -->
-                <header class="article__hero">
-            <h1 class="article__title">
-                <!-- For news: article title -->
-                <!-- For juror: juror name -->
-                <!-- For participant: participant name -->
-            <!-- <p>Lorem, ipsum dolor.</p> -->
-            </h1>
-            <!-- For news: article image -->
-            <!-- For juror/participant: profile photo -->
-            <img class="article__hero-image" src="./gfx/dawid-kwiatkowski.jpg" alt="" />
+<%= require('html-loader!./status-bar.html') %>
+<%= require('html-loader!./header.html') %>
+<section class="article">
+    <main class="main">
+        <article class="article__content">
+            <!-- Hero section that works for all types -->
+            <header class="article__hero">
+                <div class="article__title">
+                    <!-- For news: article title -->
+                    <!-- For juror: juror name -->
+                    <!-- For participant: participant name -->
+                    <!-- <p>Lorem, ipsum dolor.</p> -->
+                </div>
+                <!-- For news: article image -->
+                <!-- For juror/participant: profile photo -->
+                <img alt="" class="article__hero-image" src="./gfx/dawid-kwiatkowski.jpg"/>
             </header>
 
-        <!-- Content sections work the same for all types -->
-        <div class="article__sections">
-            <section class="article__section">
-            <!-- Flexible meta section -->
-            <div class="article__meta">
-                <!-- For news: show date and views -->
-                <div class="article__meta-text">1.09.2024</div>
-                <span class="article__meta-separator"></span>
-                <div class="article__meta-text">4568 wyświetleń</div>
-            </div>
-            <!-- Optional section title -->
-            <div class="article__section-title">
-                <p>Kim jest?</p>
-            </div>
-            
-            <!-- Text content -->
-            <div class="article__text">
-                Miuosh, czyli Miłosz Borycki, pochodzi z Katowic, w których żyje i tworzy. Pierwsze poważne kroki muzyczne stawiał w 2001 roku. Oficjalnym wydawnictwem debiutował w 2006 roku (jako
-                zespół Projektor) a rok później rozpoczął solową karierę. Do dzisiaj wydał 19 albumów, z których 7 uzyskało status Złotych Płyt, jedna  Platynowej, a dwie Podwójnej Platyny. Jego
-                projekty z Narodową Orkiestrą Symfoniczną Polskiego Radia odbiły się szerokim echem na całym świecie, a specjalny koncert łączący dwa z nich w czerwcu 2019 roku zgromadził na Stadionie
-                Śląskim ponad czterdziestotysięczną publiczność. Artysta jest również autorem muzyki do spektakli teatralnych i autorem koncertowych projektów specjalnych. Miał okazję współpracować z
-                najważniejszymi polskimi wykonawcami i muzykami (m.in. z Igo, Kasią Nosowską, Tomaszem Organkiem, Piotrem Roguckim, Smolikiem, Wojtkiem Waglewskim, Igorem Herbutem, Ralphem Kaminskim,
-                Krzysztofem Zalewskim, Darią Zawiałow, czy Zespołem Pieśni i Tańca „Śląsk”.
-                </div>
+            <!-- Content sections work the same for all types -->
+            <div class="article__sections">
+                <section class="article__section">
+                    <!-- Flexible meta section -->
+                    <div class="article__meta">
+                        <!-- For news: show date and views -->
+                        <div class="article__meta-text">1.09.2024</div>
+                        <span class="article__meta-separator"></span>
+                        <div class="article__meta-text">4568 wyświetleń</div>
+                    </div>
+                    <!-- Optional section title -->
+                    <div class="article__section-title">
+                        <p>Kim jest?</p>
+                    </div>
 
-            <!-- Optional media -->
-            <figure class="article__media video">
-                <button aria-label="Odtwórz wideo" class="video__play-btn" type="button">
-                    <img alt="" class="video__thumbnail video-preplay" data-vod="7" height="193" src="./gfx/video-thumbnail.jpg">
-                    <time class="video__duration" datetime="PT4M24S">04:24</time>
-                </button>
-            </figure>
-            </section>
-            </div>
+                    <!-- Text content -->
+                    <div class="article__text">
+                        Miuosh, czyli Miłosz Borycki, pochodzi z Katowic, w których żyje i tworzy. Pierwsze poważne
+                        kroki muzyczne stawiał w 2001 roku. Oficjalnym wydawnictwem debiutował w 2006 roku (jako
+                        zespół Projektor) a rok później rozpoczął solową karierę. Do dzisiaj wydał 19 albumów, z których
+                        7 uzyskało status Złotych Płyt, jedna  Platynowej, a dwie Podwójnej Platyny. Jego
+                        projekty z Narodową Orkiestrą Symfoniczną Polskiego Radia odbiły się szerokim echem na całym
+                        świecie, a specjalny koncert łączący dwa z nich w czerwcu 2019 roku zgromadził na Stadionie
+                        Śląskim ponad czterdziestotysięczną publiczność. Artysta jest również autorem muzyki do
+                        spektakli teatralnych i autorem koncertowych projektów specjalnych. Miał okazję współpracować z
+                        najważniejszymi polskimi wykonawcami i muzykami (m.in. z Igo, Kasią Nosowską, Tomaszem
+                        Organkiem, Piotrem Roguckim, Smolikiem, Wojtkiem Waglewskim, Igorem Herbutem, Ralphem Kaminskim,
+                        Krzysztofem Zalewskim, Darią Zawiałow, czy Zespołem Pieśni i Tańca „Śląsk”.
+                    </div>
 
-        <!-- Optional social component -->
-        <div class="article__social">
-            <%= require('html-loader!./social-component.html') %>
+                    <!-- Optional media -->
+                    <figure class="article__media video">
+                        <button aria-label="Odtwórz wideo" class="video__play-btn" type="button">
+                            <img alt="" class="video__thumbnail video-preplay" data-vod="7" height="193"
+                                 src="./gfx/video-thumbnail.jpg">
+                            <time class="video__duration" datetime="PT4M24S">04:24</time>
+                        </button>
+                    </figure>
+                </section>
+                <!-- Optional social component -->
+                <div class="article__social">
+                    <%= require('html-loader!./social-component.html') %>
                 </div>
-                </article>
-                </main>
-    </section>
+            </div>
+        </article>
+    </main>
+</section>
 </body>
 </html>
